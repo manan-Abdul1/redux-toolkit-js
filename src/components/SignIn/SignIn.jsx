@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
-import "./SignIn.css"
+import "./SignIn.css";
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { signIn } from '../../redux-toolkit/features/users/userSlice';
+import toast from 'react-hot-toast';
+
 
 const SignIn = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const userData = useSelector(state=>state.users.usersData)
-
+  const userData = useSelector(state => state.users.usersData);
 
   const [formData, setFormData] = useState({
     email: '',
@@ -25,16 +26,17 @@ const SignIn = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const user = userData.find(user => user.email === formData.email && formData.password)
-    // const userId = 
-    console.log(user.userId)
-    if(user){
-      dispatch(signIn(user.userId)); 
-      navigate("/")
-      
-    }
-    else{
-      console.log("Invalid Credentials")
+
+    const user = userData.find(user => user.email === formData.email);
+
+    if (!user) {
+      toast.error("User not exist ");
+    } else if (user.password !== formData.password) {
+      toast.error("Incorrect password");
+    } else {
+      toast.success("User Successfully Logged In!")
+      dispatch(signIn(user.userId));
+      navigate("/");
     }
   };
 
@@ -57,9 +59,10 @@ const SignIn = () => {
           onChange={handleInputChange}
         />
         <button type="submit">Sign In</button>
-      <p onClick={()=>navigate('/signup')} style={{cursor:"pointer"}}>Create new accout? Register</p>
+        <p onClick={() => navigate('/signup')} style={{ cursor: "pointer" }}>Create new account? Register</p>
       </form>
     </div>
+
   );
 };
 

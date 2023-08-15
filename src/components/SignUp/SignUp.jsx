@@ -1,20 +1,20 @@
-import { useState } from 'react';
 import "./SignUp.css"
 import { useDispatch, useSelector } from 'react-redux';
 import { register } from '../../redux-toolkit/features/users/userSlice';
 import { useNavigate } from 'react-router-dom';
-import { v4 as uuidv4 } from 'uuid'; 
+import { v4 as uuidv4 } from 'uuid';
+import toast from 'react-hot-toast';
 
 
 const SignUp = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const [formData, setFormData] = useState({
     username: '',
     email: '',
     password: '',
   });
+  const existingEmail = useSelector(state => state.users.usersData).find(user => user.email === formData.email);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -23,16 +23,22 @@ const SignUp = () => {
       [name]: value,
     });
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(register({...formData, userId: uuidv4()})); 
-    navigate("/signin")
+    if (existingEmail) {
+      toast.error('Email already exists');
+    } else {
+      dispatch(register({ ...formData, userId: uuidv4() }));
+      navigate("/signin");
+      toast.success('Account created successfully!');
+    }
   };
 
   return (
     <div className="signup-container">
       <h2>Sign Up</h2>
-      <form onSubmit={handleSubmit} className="signup-form" autoComplete='off'> 
+      <form onSubmit={handleSubmit} className="signup-form" autoComplete='off'>
         <input
           type="text"
           name="username"

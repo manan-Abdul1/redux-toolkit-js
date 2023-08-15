@@ -3,6 +3,7 @@ import Home from './components/Home/Home'
 import SignIn from './components/SignIn/SignIn'
 import SignUp from './components/SignUp/SignUp'
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
+import { Toaster } from 'react-hot-toast'
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
           <Route path='signin' element={<SignIn />} />
         </Routes>
       </Router>
+      <Toaster position="top-right" />
 
     </>
   )

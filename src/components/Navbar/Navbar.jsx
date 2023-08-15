@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../redux-toolkit/features/users/userSlice';
-import './Navbar.css'; // Import the CSS file
+import './Navbar.css'; 
+import { toast } from 'react-hot-toast';
 
 function Navbar() {
   const userId = useSelector(state=>state.users.loggedInUser);
@@ -11,6 +12,7 @@ function Navbar() {
 
   const handleSignOut = () => {
     dispatch(logout());
+    toast.success("Log out!")
   };
 
   const handleToggleDropdown = () => {

@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { completedTask, deleteTodo } from '../../redux-toolkit/features/todolist/todoSlice';
-// import { completedTask, deleteTodo } from '../../redux-toolkit/features/users/userSlice';
+import { editTodo, completedTask, deleteTodo } from '../../redux-toolkit/features/todolist/todoSlice';
 
 function TaskItem({ task }) {
     const dispatch = useDispatch();
+    const [isEditing, setIsEditing] = useState(false);
+    const [editedDescription, setEditedDescription] = useState(task.description);
 
     const handleDelete = () => {
         dispatch(deleteTodo(task.taskId));
@@ -14,23 +15,47 @@ function TaskItem({ task }) {
         dispatch(completedTask(task.taskId));
     };
 
+    const handleEditClick = () => {
+        setIsEditing(true);
+    };
+
+    const handleEditSave = () => {
+        dispatch(editTodo({ taskId: task.taskId, description: editedDescription }));
+        setIsEditing(false);
+    };
+
+    const handleEditCancel = () => {
+        setIsEditing(false);
+        setEditedDescription(task.description); 
+    };
+
     return (
         <li className="task-item">
-            <span className={`task-item-title ${task.completed ? 'completed' : ''} `}>{task.description}</span>
-            <div className="task-buttons">
-                <button
-                    className="complete-button"
-                    onClick={handleToggleComplete}
-                >
-                    {task.completed ? 'Uncomplete' : 'Complete'}
-                </button>
-                <button
-                    className="delete-button"
-                    onClick={handleDelete}
-                >
-                    Delete
-                </button>
-            </div>
+            {isEditing ? (
+                <>
+                    <input
+                        className='editing-input'
+                        type="text"
+                        value={editedDescription}
+                        onChange={(e) => setEditedDescription(e.target.value)}
+                    />
+                    <button className="save-button" onClick={handleEditSave}>Save</button>
+                    <button className="cancel-button" onClick={handleEditCancel}>Cancel</button>
+                </>
+            ) : (
+                <>
+                    <span className={`task-item-title ${task.completed ? 'completed' : ''} `}>
+                        {task.description}
+                    </span>
+                    <div className="task-buttons">
+                        <button className="edit-button" onClick={handleEditClick}>Edit</button>
+                        <button className="complete-button" onClick={handleToggleComplete}>
+                            {task.completed ? 'Uncomplete' : 'Complete'}
+                        </button>
+                        <button className="delete-button" onClick={handleDelete}>Delete</button>
+                    </div>
+                </>
+            )}
         </li>
     );
 }

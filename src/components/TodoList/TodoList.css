@@ -1,78 +1,130 @@
 /* TodoList.css */
 
 .todolist-container {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    padding-top: 0;
-  }
-  .todolist-container h1{
-    text-align: center;
-  }
-  
-  .task-list {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .task-list li {
-    margin: 8px 0;
-  }
-  
-  .add-task-form {
-    display: flex;
-    margin-top: 20px;
-  }
-  
-  .add-task-form input {
-    flex: 1;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px 0 0 5px;
-  }
-  
-  .add-task-form button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 0 5px 5px 0;
-    cursor: pointer;
-  }
-  .task-list {
-    list-style: none;
-    padding: 0;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  padding-top: 0;
+}
+
+.todolist-container h1 {
+  text-align: center;
+}
+
+.task-list {
+  list-style: none;
+  padding: 0;
+}
+
+.task-list li {
+  margin: 8px 0;
+}
+
+.add-task-form {
+  display: flex;
+  margin-top: 20px;
+}
+
+.add-task-form input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px 0 0 5px;
+}
+
+.add-task-form button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+}
+
+.task-list {
+  list-style: none;
+  padding: 0;
 }
 
 .task-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid #ddd;
-    padding: 0.5rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #ddd;
+  padding: 0.5rem 0;
 }
 
 .task-item-title.completed {
-    text-decoration: line-through;
-    color: #888;
+  text-decoration: line-through;
+  color: #888;
 }
 
 .task-buttons {
-    display: flex;
-    gap: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
 }
 
-.complete-button, .delete-button {
-    padding: 0.25rem 0.5rem;
-    border: none;
-    cursor: pointer;
-    background-color: #333;
-    color: white;
+.edit-button {
+  background-color: #2ac6d1;
+  /* padding: 0.75rem 0.5rem; */
+
 }
 
-.complete-button:hover, .delete-button:hover {
-    background-color: #555;
+.edit-button:hover {
+  background-color: #256f6d;
+}
+
+
+.complete-button {
+  /* padding: 0.75rem 0.5rem; */
+  background-color: #333;
+  color: white;
+}
+
+.complete-button:hover {
+  background-color: #555;
+}
+
+.delete-button {
+  background-color: #B31312;
+  /* padding: 0.75rem 0.5rem; */
+  border: none;
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  background-color: #dc2e2e;
+}
+
+.save-button {
+  /* padding: 0.25rem 0.5rem; */
+  border: none;
+  cursor: pointer;
+  background-color: #149253;
+  color: white;
+  margin-right: 5px;
+}
+
+.save-button:hover {
+  background-color: #27a767;
+}
+
+.cancel-button {
+  /* padding: 0.25rem 0.5rem; */
+  border: none;
+  cursor: pointer;
+  background-color: #921414;
+  color: white;
+}
+
+.cancel-button:hover {
+  background-color: #a73232;
+}
+
+.editing-input {
+  padding: 10px;
+  margin-right: 5px;
 }
