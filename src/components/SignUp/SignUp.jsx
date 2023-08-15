@@ -3,6 +3,8 @@ import "./SignUp.css"
 import { useDispatch, useSelector } from 'react-redux';
 import { register } from '../../redux-toolkit/features/users/userSlice';
 import { useNavigate } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid'; 
+
 
 const SignUp = () => {
   const dispatch = useDispatch();
@@ -23,7 +25,7 @@ const SignUp = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(register(formData)); 
+    dispatch(register({...formData, userId: uuidv4()})); 
     navigate("/signin")
   };
 

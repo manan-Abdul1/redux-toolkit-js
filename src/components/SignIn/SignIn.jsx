@@ -26,9 +26,10 @@ const SignIn = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const user = userData.find(user => user.email === formData.email && formData.password)
-    console.log(user)
+    // const userId = 
+    console.log(user.userId)
     if(user){
-      dispatch(signIn(user)); 
+      dispatch(signIn(user.userId)); 
       navigate("/")
       
     }

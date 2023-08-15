@@ -1,7 +1,8 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage'; // You can use 'localStorage' or 'sessionStorage'
 import usersReducer from "../features/users/userSlice";
+import todoReducer from "../features/todolist/todoSlice";
 
 const persistConfig = {
   key: 'root', // Key for storage
@@ -9,13 +10,11 @@ const persistConfig = {
   // You can also blacklist or whitelist certain reducers if needed
   blacklist: [], // Reducers you don't want to persist
 };
-
-const persistedReducer = persistReducer(persistConfig, usersReducer);
+const rootReducer = combineReducers({users:usersReducer,todo:todoReducer})
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({
-  reducer: {
-    users: persistedReducer, // Use the persisted reducer
-  },
+  reducer: persistedReducer,
 });
 
 const persistor = persistStore(store);

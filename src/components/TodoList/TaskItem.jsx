@@ -1,21 +1,22 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { completedTask, deleteTodo } from '../../redux-toolkit/features/users/userSlice';
+import { completedTask, deleteTodo } from '../../redux-toolkit/features/todolist/todoSlice';
+// import { completedTask, deleteTodo } from '../../redux-toolkit/features/users/userSlice';
 
-function TaskItem({ task, email, taskId }) {
+function TaskItem({ task }) {
     const dispatch = useDispatch();
 
     const handleDelete = () => {
-        dispatch(deleteTodo({ email, taskId }));
+        dispatch(deleteTodo(task.taskId));
     };
 
     const handleToggleComplete = () => {
-        dispatch(completedTask({ email, taskId }));
+        dispatch(completedTask(task.taskId));
     };
 
     return (
         <li className="task-item">
-            <span className={`task-item-title ${task.completed ? 'completed' : ''} `}>{task.task}</span>
+            <span className={`task-item-title ${task.completed ? 'completed' : ''} `}>{task.description}</span>
             <div className="task-buttons">
                 <button
                     className="complete-button"
@@ -23,12 +24,12 @@ function TaskItem({ task, email, taskId }) {
                 >
                     {task.completed ? 'Uncomplete' : 'Complete'}
                 </button>
-                    <button
-                        className="delete-button"
-                        onClick={handleDelete}
-                    >
-                        Delete
-                    </button>
+                <button
+                    className="delete-button"
+                    onClick={handleDelete}
+                >
+                    Delete
+                </button>
             </div>
         </li>
     );
