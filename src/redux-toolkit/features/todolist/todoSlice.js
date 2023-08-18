@@ -5,31 +5,58 @@ const initialState = {
     todoList: [],
 };
 export const fetchTasks = createAsyncThunk('todo/fetchTasks', async (userId) => {
-    const response = await axios.get(`http://localhost:5500/api/tasks?userId=${userId}`);
-    return response.data;
+    try {
+        const response = await axios.get(`http://localhost:5500/api/tasks?userId=${userId}`);
+        return response.data;
+    } catch (error) {
+        console.error(error.response.data.error)
+    }
 });
 
 export const createNewTask = createAsyncThunk('todo/createNewTask', async (newTaskObj) => {
-    const response = await axios.post('http://localhost:5500/api/createNewTask', newTaskObj);
-    return response.data;
+    try {
+        const response = await axios.post('http://localhost:5500/api/createNewTask', newTaskObj);
+        return response.data;
+    } catch (error) {
+        console.error(error.response.data.error)
+    }
 });
 
 export const deleteTask = createAsyncThunk('todo/deleteTask', async (taskId) => {
-    const response = await axios.delete(`http://localhost:5500/api/deleteTask?taskId=${taskId}`);
-    return response.data.taskId;
+    try {
+        const response = await axios.delete(`http://localhost:5500/api/deleteTask?taskId=${taskId}`);
+        return response.data.taskId;
+    } catch (error) {
+        console.error(error.response.data.error)
+    }
 });
 
 export const completeTask = createAsyncThunk('todo/completeTask', async (taskId) => {
-    const response = await axios.put(`http://localhost:5500/api/completedTask?taskId=${taskId}`);
-    return response.data.taskId;
+    try {
+        const response = await axios.put(`http://localhost:5500/api/completedTask?taskId=${taskId}`);
+        return response.data.taskId;
+    } catch (error) {
+        console.error(error.response.data.error)
+    }
 });
+
 export const editTask = createAsyncThunk('todo/editTask', async (editTaskObj) => {
-    const response = await axios.put("http://localhost:5500/api/editTask", editTaskObj);
-    return response.data;
+    try {
+        const response = await axios.put("http://localhost:5500/api/editTask", editTaskObj);
+        return response.data;
+    } catch (error) {
+        console.error(error.response.data.error)
+    }
 });
+
 const todoSlice = createSlice({
     name: 'todo',
     initialState,
+    reducers: {
+        resetTodoList: (state) => {
+            state.todoList = [];
+        },
+    },
     // reducers: {
     //     addToDo: (state, action) => {
     //         state.todoList.push(action.payload);
@@ -101,5 +128,6 @@ const todoSlice = createSlice({
 
 });
 
+export const { resetTodoList } = todoSlice.actions;
 // export const { addToDo, deleteTodo, completedTask, editTodo } = todoSlice.actions;
 export default todoSlice.reducer;

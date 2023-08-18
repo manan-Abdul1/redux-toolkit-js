@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../redux-toolkit/features/users/userSlice';
 import './Navbar.css'; 
 import { toast } from 'react-hot-toast';
+import { resetTodoList } from '../../redux-toolkit/features/todolist/todoSlice';
 
 function Navbar() {
   const userId = useSelector(state=>state.users.loggedInUser);
@@ -12,6 +13,7 @@ function Navbar() {
 
   const handleSignOut = () => {
     dispatch(logout());
+    dispatch(resetTodoList());
     toast.success("Log out!")
   };
 

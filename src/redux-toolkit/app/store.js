@@ -8,13 +8,14 @@ const persistConfig = {
   key: 'root', // Key for storage
   storage, // Storage medium to use (localStorage, sessionStorage, etc.)
   // You can also blacklist or whitelist certain reducers if needed
-  blacklist: ['todo'], // Reducers you don't want to persist
 };
-const rootReducer = combineReducers({users:usersReducer,todo:todoReducer})
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+const userPersistedReducer = persistReducer(persistConfig, usersReducer);
 
 const store = configureStore({
-  reducer: persistedReducer,
+  reducer: {
+    users: userPersistedReducer,
+    todo: todoReducer
+  }
 });
 
 const persistor = persistStore(store);
