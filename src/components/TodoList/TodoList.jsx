@@ -15,19 +15,19 @@ function TodoList() {
     const loading = useSelector(state => state.todo.loading)
     const tasks = useSelector(state => state.todo.todoList)?.filter(taskItems=>taskItems.userId===userId);
 
-    // const fetchAndSetTasks = async () => {
-    //     try {
-    //         const response = await dispatch(fetchTasks(userId));
-    //         console.log(response,'response')
-    //         // setTasks(response.payload);
-    //     } catch (error) {
-    //         console.error('Error fetching tasks:', error);
-    //     }
-    // };
+    const fetchAndSetTasks = async () => {
+        try {
+            const response = await dispatch(fetchTasks(userId));
+            console.log(response,'response')
+            // setTasks(response.payload);
+        } catch (error) {
+            console.error('Error fetching tasks:', error);
+        }
+    };
 
-    // useEffect(() => {
-    //     fetchAndSetTasks();
-    // }, []);
+    useEffect(() => { 
+        fetchAndSetTasks();
+    }, []);
 
     console.log(tasks, 'tasks')
     
