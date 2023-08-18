@@ -12,28 +12,28 @@ function TodoList() {
     const dispatch = useDispatch();
     const userId = useSelector(state => state.users.loggedInUser);
     const id = uuidv4();
-    const [tasks, setTasks] = useState([]);
     const loading = useSelector(state => state.todo.loading)
-    // const tasks = useSelector(state => state.todo.todoList)?.filter(taskItems=>taskItems.userId===userId);
-    // useSelector(state=>console.log(state))
-    const fetchAndSetTasks = async () => {
-        try {
-            const response = await dispatch(fetchTasks(userId));
-            setTasks(response.payload);
-        } catch (error) {
-            console.error('Error fetching tasks:', error);
-        }
-    };
+    const tasks = useSelector(state => state.todo.todoList)?.filter(taskItems=>taskItems.userId===userId);
 
-    useEffect(() => {
-        fetchAndSetTasks();
-    }, []);
+    // const fetchAndSetTasks = async () => {
+    //     try {
+    //         const response = await dispatch(fetchTasks(userId));
+    //         console.log(response,'response')
+    //         // setTasks(response.payload);
+    //     } catch (error) {
+    //         console.error('Error fetching tasks:', error);
+    //     }
+    // };
+
+    // useEffect(() => {
+    //     fetchAndSetTasks();
+    // }, []);
+
     console.log(tasks, 'tasks')
+    
     const handleAddTask = (newTask) => {
         const newTaskObj = { userId, taskId: id, description: newTask, completed: false };
-        dispatch(createNewTask(newTaskObj)).then(() => {
-            fetchAndSetTasks();
-        })
+        dispatch(createNewTask(newTaskObj))
         // dispatch(addToDo(newTaskObj));
     };
     return (
@@ -46,7 +46,7 @@ function TodoList() {
                         <Loader />
                     ) : (
                         tasks?.map((task, index) => (
-                            <TaskItem key={index} task={task} fetchAndSetTasks={fetchAndSetTasks} />
+                            <TaskItem key={index} task={task} />
                         ))
                     )}
                 </ul>

@@ -3,21 +3,17 @@ import { useDispatch } from 'react-redux';
 import { completeTask, deleteTask, editTask } from '../../redux-toolkit/features/todolist/todoSlice';
 // import { editTodo, completedTask, deleteTodo } from '../../redux-toolkit/features/todolist/todoSlice';
 
-function TaskItem({ task, fetchAndSetTasks }) {
+function TaskItem({ task }) {
     const dispatch = useDispatch();
     const [isEditing, setIsEditing] = useState(false);
     const [editedDescription, setEditedDescription] = useState(task.description);
     const handleDelete = () => {
-        dispatch(deleteTask(task.taskId)).then(() => {
-            fetchAndSetTasks();
-        })
+        dispatch(deleteTask(task.taskId))
         // dispatch(deleteTodo(task.taskId));
     };
 
     const handleToggleComplete = () => {
-        dispatch(completeTask(task.taskId)).then(() => {
-            fetchAndSetTasks();
-        })
+        dispatch(completeTask(task.taskId))
         // dispatch(completedTask(task.taskId));
     };
 
