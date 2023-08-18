@@ -1,18 +1,24 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { editTodo, completedTask, deleteTodo } from '../../redux-toolkit/features/todolist/todoSlice';
+import { completeTask, deleteTask, editTask } from '../../redux-toolkit/features/todolist/todoSlice';
+// import { editTodo, completedTask, deleteTodo } from '../../redux-toolkit/features/todolist/todoSlice';
 
-function TaskItem({ task }) {
+function TaskItem({ task, fetchAndSetTasks }) {
     const dispatch = useDispatch();
     const [isEditing, setIsEditing] = useState(false);
     const [editedDescription, setEditedDescription] = useState(task.description);
-
     const handleDelete = () => {
-        dispatch(deleteTodo(task.taskId));
+        dispatch(deleteTask(task.taskId)).then(() => {
+            fetchAndSetTasks();
+        })
+        // dispatch(deleteTodo(task.taskId));
     };
 
     const handleToggleComplete = () => {
-        dispatch(completedTask(task.taskId));
+        dispatch(completeTask(task.taskId)).then(() => {
+            fetchAndSetTasks();
+        })
+        // dispatch(completedTask(task.taskId));
     };
 
     const handleEditClick = () => {
@@ -20,13 +26,14 @@ function TaskItem({ task }) {
     };
 
     const handleEditSave = () => {
-        dispatch(editTodo({ taskId: task.taskId, description: editedDescription }));
+        dispatch(editTask({ taskId: task.taskId, description: editedDescription }))
+        // dispatch(editTodo({ taskId: task.taskId, description: editedDescription }));
         setIsEditing(false);
     };
 
     const handleEditCancel = () => {
         setIsEditing(false);
-        setEditedDescription(task.description); 
+        setEditedDescription(task.description);
     };
 
     return (

@@ -128,3 +128,9 @@
   padding: 10px;
   margin-right: 5px;
 }
+.loading{
+  text-align: center;
+  margin-top: 20px;
+  color:"#fff";
+  background-color:"#F4442E";
+}
