@@ -1,7 +1,12 @@
 const taskModel = require("../models/todoListSchema");
-
+const { verifyToken } = require("../utils/jwt")
 const createNewTask = async (req, res) => {
     try {
+        const isVerified = verifyToken(req)
+        if (!isVerified) {
+            res.status(401).json({ error: "Unauthorized" });
+            return;
+        }
         const newTask = new taskModel(req.body);
         const savedTask = await newTask.save();
         res.status(201).json(savedTask);
@@ -96,6 +101,11 @@ const editTask = async (req, res) => {
 
 const getTasksByUserId = async (req, res) => {
     try {
+        const isVerified = verifyToken(req)
+        if (!isVerified) {
+            res.status(401).json({ error: "Unauthorized" });
+            return;
+        }
         const userId = req.query.userId;
 
         if (!userId) {

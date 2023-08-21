@@ -1,4 +1,4 @@
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage'; // You can use 'localStorage' or 'sessionStorage'
 import usersReducer from "../features/users/userSlice";
@@ -15,7 +15,8 @@ const store = configureStore({
   reducer: {
     users: userPersistedReducer,
     todo: todoReducer
-  }
+  },
+  middleware: getDefaultMiddleware({serializableCheck: false})
 });
 
 const persistor = persistStore(store);

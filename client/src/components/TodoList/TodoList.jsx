@@ -4,19 +4,19 @@ import AddTask from './AddTask';
 import { useDispatch, useSelector } from 'react-redux';
 import TaskItem from './TaskItem';
 import { v4 as uuidv4 } from 'uuid';
-import { createNewTask, fetchTasks } from '../../redux-toolkit/features/todolist/todoSlice';
 import Loader from '../Loader/Loader';
+import { fetchTask, createNewTask } from '../../redux-toolkit/actions/todolist';
 // import { addToDo } from '../../redux-toolkit/features/todolist/todoSlice';
 
 function TodoList() {
     const dispatch = useDispatch();
-    const userId = useSelector(state => state.users.loggedInUser);
+    const userId = useSelector(state => state.users.user.id);
     const id = uuidv4();
     const loading = useSelector(state => state.todo.loading)
     const tasks = useSelector(state => state.todo.todoList);
 
     useEffect(() => { 
-        dispatch(fetchTasks(userId));
+        dispatch(fetchTask(userId));
     }, []);
     
     const handleAddTask = (newTask) => {

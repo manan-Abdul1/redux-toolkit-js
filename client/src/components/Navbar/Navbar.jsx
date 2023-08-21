@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { logout } from '../../redux-toolkit/features/users/userSlice';
 import './Navbar.css'; 
 import { toast } from 'react-hot-toast';
 import { resetTodoList } from '../../redux-toolkit/features/todolist/todoSlice';
+import { logout } from '../../redux-toolkit/features/users/userSlice';
 
 function Navbar() {
   const userId = useSelector(state=>state.users.loggedInUser);
-  const usersData = useSelector(state => state.users.usersData).find(user=>user.userId===userId);
+  const usersData = useSelector(state => state.users.user)
   const dispatch = useDispatch();
   const [showDropdown, setShowDropdown] = useState(false);
 

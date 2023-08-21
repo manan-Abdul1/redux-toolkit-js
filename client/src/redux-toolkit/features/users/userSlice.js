@@ -1,55 +1,38 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 
 const initialState = {
-    usersData: [],
+    user: {},
     isLoggedIn: false,
-    loggedInUser: null,
+    loggedInUser: null
 }
+
+export const createNewUser = createAsyncThunk('user/createNewUser', async (newUserObj) => {
+    try {
+        const response = await axios.post("http://localhost:5500/user/createNewUser", newUserObj);
+        console.log(response,'response')
+        return response.data;
+    } catch (error) {
+        return error.response.data.error;
+    }
+})
+
+
 
 const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        register: (state, action) => {
-            state.usersData = [...state.usersData, { ...action.payload }]
-            state.isLoggedIn = false
-        },
-        signIn: (state, action) => {
-            state.loggedInUser = action.payload
-            state.isLoggedIn = true
+        setLoggedIn: (state, action) => {
+            state.isLoggedIn = true;
+            state.user = { ...action.payload }
         },
         logout: (state) => {
-            state.loggedInUser = null
             state.isLoggedIn = false
-        },
-        // addToDo: (state, action) => {
-        //     const { userId, todos } = action.payload;
-        //     const user = state.usersData.find(user => user.userId === userId);
-        //     if (user) {
-        //         user.todos = todos;
-        //     }
-        // },
-        // deleteTodo: (state, action) => {
-        //     const { userId, taskId } = action.payload;
-        //     const user = state.usersData.find(user => user.userId === userId);
-        //     if (user) {
-        //         user.todos = user.todos.filter(todo => todo.taskId !== taskId);
-        //     }
-        // },
-        // completedTask: (state, action) => {
-        //     const { userId, taskId } = action.payload;
-        //     const user = state.usersData.find(user => user.userId === userId);
-        //     if (user) {
-        //         const todo = user.todos.find(todo => todo.taskId === taskId);
-        //         console.log(todo.completed,'da')
-        //         if (todo) {
-        //             todo.completed = !todo.completed;
-        //         }
-        //     }
-        // }
+            state.user= {}
+        }
     }
 })
-// export const { register, logout, signIn, addToDo, deleteTodo, completedTask } = userSlice.actions
-export const { register, logout, signIn } = userSlice.actions
+export const { logout, setLoggedIn } = userSlice.actions
 
 export default userSlice.reducer
