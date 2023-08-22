@@ -8,18 +8,21 @@ const createAuthorizationToken = (user) => jwt.sign({
 
 const verifyToken = (req) => {
     try {
+        const auth = req.headers.authorization;
+        if (auth) {
+            const authToken = auth.split('Bearer ')[1];
+            jwt.verify(authToken, secretKey);
+            return true;
+        } else {
+            console.log("Authorization header missing");
+            return false;
+        }
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
+};
 
-        const auth = req.headers.authorization
-        const authToken = auth.split('Bearer ')[1]
-        console.log(authToken)
-        jwt.verify(authToken, secretKey)
-        return true
-    }
-    catch (error) {
-        console.log(error)
-        return false
-    }
-}
 module.exports = ({
     verifyToken, createAuthorizationToken
 })

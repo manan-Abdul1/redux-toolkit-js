@@ -19,6 +19,12 @@ const createNewTask = async (req, res) => {
 
 const deleteTask = async (req, res) => {
     try {
+        const isVerified = verifyToken(req)
+        if (!isVerified) {
+            res.status(401).json({ error: "Unauthorized" });
+            return;
+        }
+
         const taskId = req.query.taskId;
         if (!taskId) {
             return res.status(400).json({ error: "taskId is required" });
@@ -39,8 +45,13 @@ const deleteTask = async (req, res) => {
 
 const completedTask = async (req, res) => {
     try {
-        const taskId = req.query.taskId;
+        const isVerified = verifyToken(req)
+        if (!isVerified) {
+            res.status(401).json({ error: "Unauthorized" });
+            return;
+        }
 
+        const taskId = req.query.taskId;
         if (!taskId) {
             return res.status(400).json({ error: "taskId is required" });
         }
@@ -74,6 +85,12 @@ const completedTask = async (req, res) => {
 
 const editTask = async (req, res) => {
     try {
+        const isVerified = verifyToken(req)
+        if (!isVerified) {
+            res.status(401).json({ error: "Unauthorized" });
+            return;
+        }
+
         const { taskId, description } = req.body;
         if (!taskId) {
             return res.status(400).json({ error: "taskId is required" });

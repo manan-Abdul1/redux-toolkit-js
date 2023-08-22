@@ -4,7 +4,6 @@ const { createAuthorizationToken } = require("../utils/jwt")
 
 const createNewUser = async (req, res) => {
     try {
-        console.log(req.body)
         const { email, password } = req.body;
 
         // Check if the user with the given email already exists
@@ -14,18 +13,15 @@ const createNewUser = async (req, res) => {
             return res.status(400).json({ message: "User already exists!" });
         }
 
-        // Hash the password
         const saltRounds = 10;
         const hashedPassword = await bcrypt.hash(password, saltRounds);
 
 
-        // Create a new user instance based on the request body
         const newUser = new userModel({
             ...req.body,
             password: hashedPassword
         });
 
-        // Save the new user to the database
         const savedUser = await newUser.save();
 
         res.status(201).json(savedUser);

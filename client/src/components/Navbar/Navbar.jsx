@@ -6,7 +6,6 @@ import { resetTodoList } from '../../redux-toolkit/features/todolist/todoSlice';
 import { logout } from '../../redux-toolkit/features/users/userSlice';
 
 function Navbar() {
-  const userId = useSelector(state=>state.users.loggedInUser);
   const usersData = useSelector(state => state.users.user)
   const dispatch = useDispatch();
   const [showDropdown, setShowDropdown] = useState(false);

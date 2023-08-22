@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { completeTask, deleteTask, editTask } from '../../redux-toolkit/features/todolist/todoSlice';
+// import {  deleteTask } from '../../redux-toolkit/features/todolist/todoSlice';
+import { completeTask, deleteTask, editTask } from '../../redux-toolkit/actions/todolist';
 // import { editTodo, completedTask, deleteTodo } from '../../redux-toolkit/features/todolist/todoSlice';
 
 function TaskItem({ task }) {

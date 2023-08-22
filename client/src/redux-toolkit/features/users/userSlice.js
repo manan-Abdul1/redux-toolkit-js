@@ -4,13 +4,11 @@ import axios from "axios";
 const initialState = {
     user: {},
     isLoggedIn: false,
-    loggedInUser: null
 }
 
 export const createNewUser = createAsyncThunk('user/createNewUser', async (newUserObj) => {
     try {
         const response = await axios.post("http://localhost:5500/user/createNewUser", newUserObj);
-        console.log(response,'response')
         return response.data;
     } catch (error) {
         return error.response.data.error;
@@ -29,7 +27,7 @@ const userSlice = createSlice({
         },
         logout: (state) => {
             state.isLoggedIn = false
-            state.user= {}
+            state.user = {}
         }
     }
 })
