@@ -1,6 +1,6 @@
 import "./SignUp.css"
 import { useDispatch, useSelector } from 'react-redux';
-import { createNewUser} from '../../redux-toolkit/features/users/userSlice';
+import { createNewUser } from '../../redux-toolkit/features/users/userSlice';
 import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import toast from 'react-hot-toast';
@@ -15,7 +15,6 @@ const SignUp = () => {
     email: '',
     password: '',
   });
-  // const existingEmail = useSelector(state => state.users.usersData).find(user => user.email === formData.email);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -27,17 +26,8 @@ const SignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // if (existingEmail) {
-      // toast.error('Email already exists');
-    // } else {
-      dispatch(createNewUser({ ...formData, userId: uuidv4() }));
-      // console.log(user)
-      // if(user){
-        navigate("/signin");
-      // }
-      // dispatch(register({ ...formData, userId: uuidv4() }));
-      // toast.success('Account created successfully!');
-    // }
+    dispatch(createNewUser({ ...formData, userId: uuidv4() }));
+    navigate("/signin");
   };
 
   return (

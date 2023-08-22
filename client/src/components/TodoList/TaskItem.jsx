@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-// import {  deleteTask } from '../../redux-toolkit/features/todolist/todoSlice';
 import { completeTask, deleteTask, editTask } from '../../redux-toolkit/actions/todolist';
-// import { editTodo, completedTask, deleteTodo } from '../../redux-toolkit/features/todolist/todoSlice';
 
 function TaskItem({ task }) {
     const dispatch = useDispatch();
@@ -10,12 +8,10 @@ function TaskItem({ task }) {
     const [editedDescription, setEditedDescription] = useState(task.description);
     const handleDelete = () => {
         dispatch(deleteTask(task.taskId))
-        // dispatch(deleteTodo(task.taskId));
     };
 
     const handleToggleComplete = () => {
         dispatch(completeTask(task.taskId))
-        // dispatch(completedTask(task.taskId));
     };
 
     const handleEditClick = () => {
@@ -24,7 +20,6 @@ function TaskItem({ task }) {
 
     const handleEditSave = () => {
         dispatch(editTask({ taskId: task.taskId, description: editedDescription }))
-        // dispatch(editTodo({ taskId: task.taskId, description: editedDescription }));
         setIsEditing(false);
     };
 
