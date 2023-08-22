@@ -2,7 +2,6 @@ import "./SignUp.css"
 import { useDispatch, useSelector } from 'react-redux';
 import { createNewUser } from '../../redux-toolkit/features/users/userSlice';
 import { useNavigate } from 'react-router-dom';
-import { v4 as uuidv4 } from 'uuid';
 import toast from 'react-hot-toast';
 import { useState } from "react";
 
@@ -26,7 +25,7 @@ const SignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(createNewUser({ ...formData, userId: uuidv4() }));
+    dispatch(createNewUser({ ...formData }));
     navigate("/signin");
   };
 

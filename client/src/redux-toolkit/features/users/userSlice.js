@@ -8,8 +8,7 @@ const initialState = {
 
 export const createNewUser = createAsyncThunk('user/createNewUser', async (newUserObj) => {
     try {
-        const response = await axios.post("http://localhost:5500/user/createNewUser", newUserObj);
-        return response.data;
+        await axios.post("http://localhost:5500/user/createNewUser", newUserObj);
     } catch (error) {
         return error.response.data.error;
     }
