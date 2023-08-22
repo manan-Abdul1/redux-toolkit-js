@@ -3,21 +3,20 @@ import './TodoList.css';
 import AddTask from './AddTask';
 import { useDispatch, useSelector } from 'react-redux';
 import TaskItem from './TaskItem';
-import { v4 as uuidv4 } from 'uuid';
 import { fetchTasks, createNewTask } from '../../redux-toolkit/actions/todolist';
 
 function TodoList() {
     const dispatch = useDispatch();
     const userId = useSelector(state => state.users.user.id);
-    const id = uuidv4();
     const tasks = useSelector(state => state.todo.todoList);
+    useSelector(state=>console.log(state))
 
     useEffect(() => {
         dispatch(fetchTasks(userId));
     }, []);
 
     const handleAddTask = (newTask) => {
-        const newTaskObj = { userId, taskId: id, description: newTask, completed: false };
+        const newTaskObj = { userId, description: newTask, completed: false };
         dispatch(createNewTask(newTaskObj))
     };
 
