@@ -30,7 +30,7 @@ const deleteTask = async (req, res) => {
             return res.status(400).json({ error: "taskId is required" });
         }
 
-        const deletedTask = await taskModel.findOneAndDelete({ taskId });
+        const deletedTask = await taskModel.findOneAndDelete({ _id: taskId });
 
         if (!deletedTask) {
             return res.status(404).json({ error: "Task not found" });

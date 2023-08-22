@@ -7,7 +7,7 @@ function TaskItem({ task }) {
     const [isEditing, setIsEditing] = useState(false);
     const [editedDescription, setEditedDescription] = useState(task.description);
     const handleDelete = () => {
-        dispatch(deleteTask(task.taskId))
+        dispatch(deleteTask(task._id))
     };
 
     const handleToggleComplete = () => {
