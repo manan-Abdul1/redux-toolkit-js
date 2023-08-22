@@ -63,7 +63,4 @@ export const deleteTask = (taskId) => async (dispatch) => {
         }
     };
 
-export const signIn = ({ email, password }) => (dispatch) => {
-    axios.post('http://localhost:5500/user/signIn', { email, password })
-        .then(response => dispatch(setLoggedIn(response.data.user)));
-};
+

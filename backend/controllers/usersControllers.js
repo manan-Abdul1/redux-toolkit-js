@@ -57,7 +57,7 @@ const signInUser = async (req, res) => {
         }
 
         // Password is correct, user is authenticated
-        res.status(200).json({ message: 'User authenticated', user: { email: user.email, id: user.userId, username: user.username, token: createAuthorizationToken(user) } });
+        res.status(200).json({ message: 'User authenticated', user: { email: user.email, id: user._id, username: user.username, token: createAuthorizationToken(user) } });
     } catch (error) {
         console.error('Error:', error);
         res.status(500).json({ error: 'An error occurred while signing in' });
