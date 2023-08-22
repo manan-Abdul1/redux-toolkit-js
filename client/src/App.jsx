@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux'
 import Home from './components/Home/Home'
 import SignIn from './components/SignIn/SignIn'
 import SignUp from './components/SignUp/SignUp'
-import { BrowserRouter as Router, Routes, Route, Navigate, useLocation, useNavigate } from 'react-router-dom'
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
 import { useEffect } from 'react'
 
