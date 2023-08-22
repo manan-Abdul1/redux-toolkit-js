@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { completeTask, deleteTask, editTask } from '../../redux-toolkit/actions/todolist';
 
 function TaskItem({ task }) {
     const dispatch = useDispatch();
     const [isEditing, setIsEditing] = useState(false);
+    const [loading, setLoading] = useState(false)
     const [editedDescription, setEditedDescription] = useState(task.description);
+
     const handleDelete = () => {
         dispatch(deleteTask(task._id))
     };
@@ -19,8 +21,8 @@ function TaskItem({ task }) {
     };
 
     const handleEditSave = () => {
-        dispatch(editTask({ taskId: task.taskId, description: editedDescription }))
-        setIsEditing(false);
+        dispatch(editTask({ taskId: task._id, description: editedDescription }))
+        setIsEditing(false)
     };
 
     const handleEditCancel = () => {
@@ -38,7 +40,7 @@ function TaskItem({ task }) {
                         value={editedDescription}
                         onChange={(e) => setEditedDescription(e.target.value)}
                     />
-                    <button className="save-button" onClick={handleEditSave}>Save</button>
+                    <button className="save-button"  onClick={handleEditSave}>Save</button>
                     <button className="cancel-button" onClick={handleEditCancel}>Cancel</button>
                 </>
             ) : (

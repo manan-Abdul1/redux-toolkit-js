@@ -99,14 +99,14 @@ const editTask = async (req, res) => {
             return res.status(400).json({ error: "description is required" });
         }
 
-        const updatedTask = await taskModel.findOneAndUpdate({ taskId }, { description });
+        const updatedTask = await taskModel.findOneAndUpdate({ _id: taskId }, { description });
 
         if (!updatedTask) {
             return res.status(404).json({ error: "Task not found" });
         }
 
         // Fetch the updated task to ensure the response reflects the updated status
-        const finalUpdatedTask = await taskModel.findOne({ taskId });
+        const finalUpdatedTask = await taskModel.findOne({ _id: taskId });
 
         res.status(200).json(finalUpdatedTask);
         // res.status(200).json(updatedTask);

@@ -9,7 +9,6 @@ function TodoList() {
     const dispatch = useDispatch();
     const userId = useSelector(state => state.users.user.id);
     const tasks = useSelector(state => state.todo.todoList);
-    useSelector(state=>console.log(state))
 
     useEffect(() => {
         dispatch(fetchTasks(userId));
