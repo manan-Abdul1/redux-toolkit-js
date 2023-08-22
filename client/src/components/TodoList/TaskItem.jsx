@@ -11,7 +11,7 @@ function TaskItem({ task }) {
     };
 
     const handleToggleComplete = () => {
-        dispatch(completeTask(task.taskId))
+        dispatch(completeTask(task._id))
     };
 
     const handleEditClick = () => {

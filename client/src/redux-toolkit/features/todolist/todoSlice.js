@@ -28,14 +28,14 @@ const todoSlice = createSlice({
         },
         completedTodoTask: (state, action) => {
             const taskId = action.payload;
-            const todo = state.todoList.find(todo => todo.taskId === taskId);
+            const todo = state.todoList.find(todo => todo._id === taskId);
             if (todo) {
                 todo.completed = !todo.completed;
             }
         },
         deleteTodoTask: (state, action) => {
             const taskId = action.payload;
-            state.todoList = state.todoList.filter(todo => todo.taskId !== taskId);
+            state.todoList = state.todoList.filter(todo => todo._id !== taskId);
         }
     }
 

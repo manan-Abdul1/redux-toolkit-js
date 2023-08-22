@@ -45,7 +45,7 @@ const deleteTask = async (req, res) => {
 
 const completedTask = async (req, res) => {
     try {
-        const isVerified = verifyToken(req)
+        const isVerified = verifyToken(req);
         if (!isVerified) {
             res.status(401).json({ error: "Unauthorized" });
             return;
@@ -55,16 +55,15 @@ const completedTask = async (req, res) => {
         if (!taskId) {
             return res.status(400).json({ error: "taskId is required" });
         }
-
-        const task = await taskModel.findOne({ taskId });
-
+        
+        const task = await taskModel.findOne({ _id: taskId });
         if (!task) {
             return res.status(404).json({ error: "Task not found" });
         }
 
         // Toggle the completed status in the database
         const updatedTask = await taskModel.findOneAndUpdate(
-            { taskId },
+            { _id: taskId },
             { completed: !task.completed }
         );
 
@@ -73,14 +72,15 @@ const completedTask = async (req, res) => {
         }
 
         // Fetch the updated task to ensure the response reflects the updated status
-        const finalUpdatedTask = await taskModel.findOne({ taskId });
+        const finalUpdatedTask = await taskModel.findOne({ _id: taskId });
 
         res.status(200).json(finalUpdatedTask);
     } catch (error) {
         console.error("Error:", error);
         res.status(500).json({ error: "An error occurred while marking the task as completed" });
     }
-}
+};
+
 
 
 const editTask = async (req, res) => {
