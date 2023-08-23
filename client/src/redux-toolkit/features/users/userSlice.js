@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { USER_BASE_URL } from "../../../utils/serverUrl";
 
 const initialState = {
     user: {},
@@ -8,10 +9,9 @@ const initialState = {
 
 export const createNewUser = createAsyncThunk('user/createNewUser', async (newUserObj) => {
     try {
-        const response = await axios.post("http://localhost:5500/user/createNewUser", newUserObj);
-        return response.data;
+        await axios.post(`${USER_BASE_URL}/createNewUser`, newUserObj);
     } catch (error) {
-        return error.response.data.error;
+        return  error.response.data
     }
 })
 

@@ -2,7 +2,6 @@ import "./SignUp.css"
 import { useDispatch, useSelector } from 'react-redux';
 import { createNewUser } from '../../redux-toolkit/features/users/userSlice';
 import { useNavigate } from 'react-router-dom';
-import { v4 as uuidv4 } from 'uuid';
 import toast from 'react-hot-toast';
 import { useState } from "react";
 
@@ -24,11 +23,16 @@ const SignUp = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(createNewUser({ ...formData, userId: uuidv4() }));
-    navigate("/signin");
-  };
+    const response = await dispatch(createNewUser({ ...formData }));
+    if (response.payload !== undefined && response.payload.message) {
+        toast.error(response.payload.message);
+    } else {
+        navigate("/signin");
+    }
+};
+
 
   return (
     <div className="signup-container">

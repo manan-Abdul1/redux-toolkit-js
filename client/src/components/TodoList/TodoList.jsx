@@ -3,41 +3,40 @@ import './TodoList.css';
 import AddTask from './AddTask';
 import { useDispatch, useSelector } from 'react-redux';
 import TaskItem from './TaskItem';
-import { v4 as uuidv4 } from 'uuid';
-import Loader from '../Loader/Loader';
 import { fetchTasks, createNewTask } from '../../redux-toolkit/actions/todolist';
+import Loader from "../Loader/Loader"
 
 function TodoList() {
     const dispatch = useDispatch();
     const userId = useSelector(state => state.users.user.id);
-    const id = uuidv4();
-    const loading = useSelector(state => state.todo.loading)
     const tasks = useSelector(state => state.todo.todoList);
+    const [loading, setLoading] = useState(false);
+
 
     useEffect(() => {
-        dispatch(fetchTasks(userId));
+        setLoading(true)
+        dispatch(fetchTasks(userId, setLoading))
     }, []);
 
     const handleAddTask = (newTask) => {
-        const newTaskObj = { userId, taskId: id, description: newTask, completed: false };
+        const newTaskObj = { userId, description: newTask, completed: false };
         dispatch(createNewTask(newTaskObj))
     };
+
     return (
-        <>
-            <div className="todolist-container">
-                <h1>Todo List</h1>
-                <AddTask onAddTask={handleAddTask} />
+        <div className="todolist-container">
+            <h1>Todo List</h1>
+            <AddTask onAddTask={handleAddTask} />
+            {loading  && tasks?.length > 0 ? (
+                <Loader/>
+            ) : (
                 <ul className="task-list">
-                    {loading && tasks?.length > 0 ? (
-                        <Loader />
-                    ) : (
-                        tasks?.map((task, index) => (
-                            <TaskItem key={index} task={task} />
-                        ))
-                    )}
+                    {tasks?.map((task, index) => (
+                        <TaskItem key={index} task={task} />
+                    ))}
                 </ul>
-            </div>
-        </>
+            )}
+        </div>
     );
 }
 
