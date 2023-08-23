@@ -4,12 +4,5 @@ import { USER_BASE_URL } from "../../utils/serverUrl";
 
 export const signIn = ({ email, password }) => (dispatch) => {
     apiRequest(`${USER_BASE_URL}/signin`, 'post', { email, password })
-    .then(response => 
-        {
-            
-            console.log('res',response.data)
-                dispatch(setLoggedIn(response.data.user))
-            }
-            
-            );
+        .then(response => dispatch(setLoggedIn(response.data.user)));
 };

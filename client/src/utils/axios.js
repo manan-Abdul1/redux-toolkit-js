@@ -2,7 +2,7 @@ import axios from 'axios';
 import { getToken } from './getAuthToken';
 const headers = {
     headers: {
-        Authorization: `Bearer ${getToken}`
+        Authorization: `Bearer ${getToken()}`
     }
 }
 

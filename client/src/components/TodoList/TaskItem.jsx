@@ -9,11 +9,13 @@ function TaskItem({ task }) {
     const [editedDescription, setEditedDescription] = useState(task.description);
 
     const handleDelete = () => {
-        dispatch(deleteTask(task._id))
+        setLoading(true);
+        dispatch(deleteTask(task._id, setLoading))
     };
 
     const handleToggleComplete = () => {
-        dispatch(completeTask(task._id))
+        setLoading(true);
+        dispatch(completeTask(task._id, setLoading))
     };
 
     const handleEditClick = () => {
@@ -21,7 +23,11 @@ function TaskItem({ task }) {
     };
 
     const handleEditSave = () => {
-        dispatch(editTask({ taskId: task._id, description: editedDescription }))
+
+        setLoading(true);
+
+        dispatch(editTask({ taskId: task._id, description: editedDescription }, setLoading))
+
         setIsEditing(false)
     };
 
@@ -40,8 +46,8 @@ function TaskItem({ task }) {
                         value={editedDescription}
                         onChange={(e) => setEditedDescription(e.target.value)}
                     />
-                    <button className="save-button"  onClick={handleEditSave}>Save</button>
-                    <button className="cancel-button" onClick={handleEditCancel}>Cancel</button>
+                    <button className="save-button" disabled={loading} onClick={handleEditSave}>Save</button>
+                    <button className="cancel-button" disabled={loading} onClick={handleEditCancel}>Cancel</button>
                 </>
             ) : (
                 <>
@@ -50,10 +56,10 @@ function TaskItem({ task }) {
                     </span>
                     <div className="task-buttons">
                         <button className="edit-button" onClick={handleEditClick}>Edit</button>
-                        <button className="complete-button" onClick={handleToggleComplete}>
+                        <button className="complete-button" disabled={loading} onClick={handleToggleComplete}>
                             {task.completed ? 'Uncomplete' : 'Complete'}
                         </button>
-                        <button className="delete-button" onClick={handleDelete}>Delete</button>
+                        <button className="delete-button" disabled={loading} onClick={handleDelete}>Delete</button>
                     </div>
                 </>
             )}
