@@ -1,21 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { completeTask, deleteTask, editTask } from '../../redux-toolkit/actions/todolist';
 
 function TaskItem({ task }) {
     const dispatch = useDispatch();
     const [isEditing, setIsEditing] = useState(false);
-    const [loading, setLoading] = useState(false)
     const [editedDescription, setEditedDescription] = useState(task.description);
-
     const handleDelete = () => {
-        setLoading(true);
-        dispatch(deleteTask(task._id, setLoading))
+        dispatch(deleteTask(task.taskId))
     };
 
     const handleToggleComplete = () => {
-        setLoading(true);
-        dispatch(completeTask(task._id, setLoading))
+        dispatch(completeTask(task.taskId))
     };
 
     const handleEditClick = () => {
@@ -23,12 +19,8 @@ function TaskItem({ task }) {
     };
 
     const handleEditSave = () => {
-
-        setLoading(true);
-
-        dispatch(editTask({ taskId: task._id, description: editedDescription }, setLoading))
-
-        setIsEditing(false)
+        dispatch(editTask({ taskId: task.taskId, description: editedDescription }))
+        setIsEditing(false);
     };
 
     const handleEditCancel = () => {
@@ -46,8 +38,8 @@ function TaskItem({ task }) {
                         value={editedDescription}
                         onChange={(e) => setEditedDescription(e.target.value)}
                     />
-                    <button className="save-button" disabled={loading} onClick={handleEditSave}>Save</button>
-                    <button className="cancel-button" disabled={loading} onClick={handleEditCancel}>Cancel</button>
+                    <button className="save-button" onClick={handleEditSave}>Save</button>
+                    <button className="cancel-button" onClick={handleEditCancel}>Cancel</button>
                 </>
             ) : (
                 <>
@@ -56,10 +48,10 @@ function TaskItem({ task }) {
                     </span>
                     <div className="task-buttons">
                         <button className="edit-button" onClick={handleEditClick}>Edit</button>
-                        <button className="complete-button" disabled={loading} onClick={handleToggleComplete}>
+                        <button className="complete-button" onClick={handleToggleComplete}>
                             {task.completed ? 'Uncomplete' : 'Complete'}
                         </button>
-                        <button className="delete-button" disabled={loading} onClick={handleDelete}>Delete</button>
+                        <button className="delete-button" onClick={handleDelete}>Delete</button>
                     </div>
                 </>
             )}

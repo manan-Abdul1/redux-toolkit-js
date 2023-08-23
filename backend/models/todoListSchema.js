@@ -5,6 +5,10 @@ const todoListSchema = new Schema({
         type: String,
         required: true
     },
+    taskId: {
+        type: String,
+        required: true
+    },
     description: { 
      type: String, 
      required: true 

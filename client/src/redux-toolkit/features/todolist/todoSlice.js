@@ -18,24 +18,27 @@ const todoSlice = createSlice({
             state.todoList = [...state.todoList, action.payload]
         },
         editTodoTask: (state, action) => {
-            const {_id, description } = action.payload;
-            const todo = state.todoList.find((todo) => todo._id === _id);
+            const { taskId, description } = action.payload;
+            const todo = state.todoList.find((todo) => todo.taskId === taskId);
             if (todo) {
                 todo.description = description;
+                state.loading = false;
             }
+
         },
         completedTodoTask: (state, action) => {
             const taskId = action.payload;
-            const todo = state.todoList.find(todo => todo._id === taskId);
+            const todo = state.todoList.find(todo => todo.taskId === taskId);
             if (todo) {
                 todo.completed = !todo.completed;
             }
         },
         deleteTodoTask: (state, action) => {
             const taskId = action.payload;
-            state.todoList = state.todoList.filter(todo => todo._id !== taskId);
-        }
-    }
+            state.todoList = state.todoList.filter(todo => todo.taskId !== taskId);
+        },
+
+    },
 
 });
 
