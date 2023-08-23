@@ -11,7 +11,7 @@ export const createNewUser = createAsyncThunk('user/createNewUser', async (newUs
     try {
         await axios.post(`${USER_BASE_URL}/createNewUser`, newUserObj);
     } catch (error) {
-        return error.response.data.error;
+        return  error.response.data
     }
 })
 

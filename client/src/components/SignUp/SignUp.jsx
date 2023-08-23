@@ -23,11 +23,16 @@ const SignUp = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(createNewUser({ ...formData }));
-    navigate("/signin");
-  };
+    const response = await dispatch(createNewUser({ ...formData }));
+    if (response.payload !== undefined && response.payload.message) {
+        toast.error(response.payload.message);
+    } else {
+        navigate("/signin");
+    }
+};
+
 
   return (
     <div className="signup-container">
