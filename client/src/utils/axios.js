@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { getToken } from './getAuthToken';
-
+//interceptors
 // a generic code to handle all api calls with ease
 export const apiRequest = async (url, method, body) => {
     try {
@@ -9,7 +9,6 @@ export const apiRequest = async (url, method, body) => {
                 Authorization: `Bearer ${getToken()}`
             }
         }
-        
         switch (method) {
             case 'get':
                 return axios.get(url, { ...headers });

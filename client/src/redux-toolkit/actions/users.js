@@ -6,3 +6,5 @@ export const signIn = ({ email, password }) => (dispatch) => {
     apiRequest(`${USER_BASE_URL}/signin`, 'post', { email, password })
         .then(response => dispatch(setLoggedIn(response.data.user)));
 };
+
+export const createNewUser = async (newUserObj) => apiRequest(`${USER_BASE_URL}/createNewUser`, 'post', newUserObj)
