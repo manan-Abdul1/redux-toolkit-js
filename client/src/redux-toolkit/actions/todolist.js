@@ -1,12 +1,11 @@
-import { addTask, completedTodoTask, deleteTodoTask, editTodoTask, setTodoList } from "../features/todolist/todoSlice";
 import { apiRequest } from "../../utils/axios";
+import { addTask, completedTodoTask, deleteTodoTask, editTodoTask, setTodoList } from "../features/todolist/todoSlice";
 import { TASK_BASE_URL } from "../../utils/serverUrl";
 
-export const fetchTasks = (userId, setLoading) => (dispatch) => {
+export const fetchTasks = (userId) => (dispatch) => {
     apiRequest(`${TASK_BASE_URL}tasks?userId=${userId}`, 'get', null)
         .then(response => {
             dispatch(setTodoList(response.data))
-            setLoading(false)
         });
 }
 export const createNewTask = (newTaskObj, setLoading) => (dispatch) => {

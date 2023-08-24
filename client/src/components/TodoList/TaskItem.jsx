@@ -23,11 +23,8 @@ function TaskItem({ task }) {
     };
 
     const handleEditSave = () => {
-
         setLoading(true);
-
         dispatch(editTask({ taskId: task._id, description: editedDescription }, setLoading))
-
         setIsEditing(false)
     };
 
@@ -47,7 +44,7 @@ function TaskItem({ task }) {
                         onChange={(e) => setEditedDescription(e.target.value)}
                     />
                     <button className="save-button" disabled={loading} onClick={handleEditSave}>Save</button>
-                    <button className="cancel-button" disabled={loading} onClick={handleEditCancel}>Cancel</button>
+                    <button className="cancel-button" onClick={handleEditCancel}>Cancel</button>
                 </>
             ) : (
                 <>

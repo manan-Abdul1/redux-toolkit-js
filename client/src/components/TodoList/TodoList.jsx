@@ -10,12 +10,9 @@ function TodoList() {
     const dispatch = useDispatch();
     const userId = useSelector(state => state.users.user.id);
     const tasks = useSelector(state => state.todo.todoList);
-    const [loading, setLoading] = useState(false);
-
 
     useEffect(() => {
-        setLoading(true)
-        dispatch(fetchTasks(userId, setLoading))
+        dispatch(fetchTasks(userId))
     }, []);
 
     const handleAddTask = (newTask) => {
@@ -27,15 +24,11 @@ function TodoList() {
         <div className="todolist-container">
             <h1>Todo List</h1>
             <AddTask onAddTask={handleAddTask} />
-            {loading  && tasks?.length > 0 ? (
-                <Loader/>
-            ) : (
-                <ul className="task-list">
-                    {tasks?.map((task, index) => (
-                        <TaskItem key={index} task={task} />
-                    ))}
-                </ul>
-            )}
+            <ul className="task-list">
+                {tasks?.map((task, index) => (
+                    <TaskItem key={index} task={task} />
+                ))}
+            </ul>
         </div>
     );
 }

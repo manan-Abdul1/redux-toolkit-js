@@ -1,14 +1,15 @@
 import axios from 'axios';
 import { getToken } from './getAuthToken';
-const headers = {
-    headers: {
-        Authorization: `Bearer ${getToken()}`
-    }
-}
 
 // a generic code to handle all api calls with ease
 export const apiRequest = async (url, method, body) => {
     try {
+        const headers = {
+            headers: {
+                Authorization: `Bearer ${getToken()}`
+            }
+        }
+        
         switch (method) {
             case 'get':
                 return axios.get(url, { ...headers });
