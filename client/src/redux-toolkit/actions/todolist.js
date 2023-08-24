@@ -1,29 +1,28 @@
 import { apiRequest } from "../../utils/axios";
 import { addTask, completedTodoTask, deleteTodoTask, editTodoTask, setTodoList } from "../features/todolist/todoSlice";
-import { TASK_BASE_URL } from "../../utils/serverUrl";
 
 export const fetchTasks = (userId) => (dispatch) => {
-    apiRequest(`${TASK_BASE_URL}tasks?userId=${userId}`, 'get', null)
+    apiRequest(`api/tasks?userId=${userId}`, 'get', null)
         .then(response => {
             dispatch(setTodoList(response.data))
         });
 }
-export const createNewTask = (newTaskObj, setLoading) => (dispatch) => {
-    apiRequest(`${TASK_BASE_URL}createNewTask`, 'post', newTaskObj)
-        .then(response => 
+export const createNewTask = (newTaskObj) => (dispatch) => {
+    apiRequest(`api/createNewTask`, 'post', newTaskObj)
+        .then(response =>
             dispatch(addTask(response.data))
         );
 };
 
 export const editTask = (editTaskObj, setLoading) => (dispatch) => {
-    apiRequest(`${TASK_BASE_URL}editTask`, 'put', editTaskObj)
+    apiRequest(`api/editTask`, 'put', editTaskObj)
         .then((res) => {
             setLoading(false);
             dispatch(editTodoTask(res.data))
         });
 };
 export const completeTask = (taskId, setLoading) => (dispatch) => {
-    apiRequest(`${TASK_BASE_URL}completedTask?taskId=${taskId}`, 'put', null)
+    apiRequest(`api/completedTask?taskId=${taskId}`, 'put', null)
         .then(response => {
             setLoading(false)
             dispatch(completedTodoTask(response.data._id))
@@ -31,7 +30,7 @@ export const completeTask = (taskId, setLoading) => (dispatch) => {
 };
 
 export const deleteTask = (taskId, setLoading) => async (dispatch) => {
-    apiRequest(`${TASK_BASE_URL}deleteTask?taskId=${taskId}`, 'delete', null)
+    apiRequest(`api/deleteTask?taskId=${taskId}`, 'delete', null)
         .then(response => {
             setLoading(false)
             dispatch(deleteTodoTask(response.data._id))
