@@ -4,6 +4,7 @@ import './Navbar.css';
 import { toast } from 'react-hot-toast';
 import { resetTodoList } from '../../redux-toolkit/features/todolist/todoSlice';
 import { logout } from '../../redux-toolkit/features/users/userSlice';
+import { NavLink } from 'react-router-dom';
 
 function Navbar() {
   const usersData = useSelector(state => state.users.user)
@@ -30,6 +31,7 @@ function Navbar() {
           {usersData.username}<i className="fa-solid fa-caret-down"></i>
           {showDropdown && (
             <div className="dropdown">
+              <NavLink to='/profile'> Profile</NavLink>
               <div className="email">
                 <strong>Email:</strong> {usersData.email}
               </div>
