@@ -63,8 +63,28 @@ const signInUser = async (req, res) => {
         res.status(500).json({ error: 'An error occurred while signing in' });
     }
 };
+const updateUser = async (req, res) => {
+    try {
+        const { userId, username, email, imageUrl } = req.body;
+        const user = await userModel.findOne({ _id: userId });
+
+        if (!user) {
+            return res.status(401).json({ message: 'User not found' });
+        }
+
+        await userModel.findOneAndUpdate({ _id: userId }, { email: email, username: username, imageUrl: imageUrl });
+
+        const updatedUser = await userModel.findOne({ _id: userId }, { password: 0 });
+
+        res.status(200).json(updatedUser);
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ error: 'An error occurred while updating user' });
+    }
+};
 module.exports = {
     createNewUser,
     getAllUsers,
-    signInUser
+    signInUser,
+    updateUser
 };

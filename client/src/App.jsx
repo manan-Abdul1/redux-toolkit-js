@@ -5,6 +5,7 @@ import SignUp from './components/SignUp/SignUp'
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
 import { useEffect } from 'react'
+import Profile from './components/Profile/Profile'
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='signup' element={<SignUp />} />
         <Route path='signin' element={<SignIn />} />
+        <Route path='profile' element={<Profile />} />
       </Routes>
       <Toaster position="top-right" />
     </>
