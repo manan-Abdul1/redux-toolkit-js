@@ -131,10 +131,6 @@ const getTasksByUserId = async (req, res) => {
 
         const tasks = await taskModel.find({ userId });
 
-        if (tasks.length === 0) {
-            return res.status(404).json({ error: "No tasks found for the given userId" });
-        }
-
         res.status(200).json(tasks);
     } catch (error) {
         console.error("Error:", error);

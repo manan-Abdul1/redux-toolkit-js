@@ -9,17 +9,6 @@ const urlInstance = axios.create({
     baseURL: "http://localhost:5500/"
 })
 
-//interceptors
-axios.interceptors.request.use(req => {
-    req.headers.Authorization = `Bearer ${getToken()}`;
-    return req;
-}, error => { return Promise.reject(error); });
-
-axios.interceptors.response.use(response => {
-    console.log(response, 'response');
-    return response;
-}, error => { return Promise.reject(error); });
-
 // Set up interceptors for the url instance
 urlInstance.interceptors.request.use(req => {
     req.headers.Authorization = `Bearer ${getToken()}`;

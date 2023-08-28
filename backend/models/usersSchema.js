@@ -13,6 +13,10 @@ const usersSchema = new Schema({
      type: String,
      required: true
     },
+    imageUrl: {
+      type: String,
+      required:false
+    }
   });
-const taskModel = mongoose.model('users', usersSchema);
-module.exports = taskModel;
+const userModel = mongoose.model('users', usersSchema);
+module.exports = userModel;
