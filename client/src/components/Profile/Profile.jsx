@@ -3,6 +3,8 @@ import axios from 'axios';
 import './Profile.css';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-hot-toast';
+import { CLOUDNIARY_IMG_URL } from '../../utils/serverUrl';
+import { apiRequest } from '../../utils/axios';
 
 const Profile = () => {
   const userId = useSelector(state => state.users.user.id)
@@ -20,17 +22,15 @@ const Profile = () => {
     formData.append('upload_preset', 'ymnrcjst');
 
     try {
-      // Upload the image to Cloudinary
-      const uploadUrl = 'https://api.cloudinary.com/v1_1/dipdjdhic/image/upload';
-      const uploadResponse = await axios.post(uploadUrl, formData);
-      // After image is uploaded, send user data along with the Cloudinary image URL to backend
-      const userUpdateUrl = `http://localhost:5500/user/updateUser`;
-      const userUpdateResponse = await axios.put(userUpdateUrl, {
+      const uploadResponse = await axios.post(CLOUDNIARY_IMG_URL, formData);
+
+      const userUpdateResponse = await apiRequest(`user/updateUser`, 'put', {
         username: username,
         email: email,
         imageUrl: uploadResponse.data.secure_url,
         userId
       });
+
       if (userUpdateResponse.status === 200) {
         toast.success("User Updated Successfully")
       }
@@ -38,6 +38,7 @@ const Profile = () => {
       console.error('Error uploading image and updating user:', error);
     }
   };
+
 
   return (
     <div className="profile-container">

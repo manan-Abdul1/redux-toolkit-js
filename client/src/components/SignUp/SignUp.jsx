@@ -1,14 +1,13 @@
 import "./SignUp.css"
-import { useDispatch } from 'react-redux';
 import { createNewUser } from '../../redux-toolkit/actions/users';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { useState } from "react";
-import axios from "axios";
+import { apiRequest } from "../../utils/axios";
+import { CLOUDNIARY_IMG_URL } from "../../utils/serverUrl";
 
 
 const SignUp = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [image, setImage] = useState(null);
   const [formData, setFormData] = useState({
@@ -31,11 +30,10 @@ const SignUp = () => {
       const userFormData = new FormData();
       userFormData.append('file', image);
       userFormData.append('upload_preset', 'ymnrcjst');
-        
+
       try {
-        const uploadUrl = 'https://api.cloudinary.com/v1_1/dipdjdhic/image/upload';
-        const uploadResponse = await axios.post(uploadUrl, userFormData);
-        await createNewUser({ ...formData, imageUrl: uploadResponse.data.secure_url  });
+        const uploadResponse = await apiRequest(CLOUDNIARY_IMG_URL, 'post', userFormData);
+        await createNewUser({ ...formData, imageUrl: uploadResponse.data.secure_url });
         navigate('/signin');
       } catch (error) {
         toast.error('Error signing up. Please try again.');
@@ -43,7 +41,7 @@ const SignUp = () => {
     } else {
       // User did not upload an image
       await createNewUser({ ...formData });
-        navigate('/signin');
+      navigate('/signin');
     }
   };
 
@@ -76,7 +74,7 @@ const SignUp = () => {
           value={formData.password}
           onChange={handleInputChange}
         />
-         <input
+        <input
           id="image"
           type="file"
           name="image"
