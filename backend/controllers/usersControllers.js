@@ -27,7 +27,7 @@ const createNewUser = async (req, res) => {
         res.status(201).json(savedUser);
     } catch (error) {
         console.error("Error:", error);
-        res.status(500).json({ error: "An error occurred while creating the user" });
+        res.status(500).json( { message: error._message });
     }
 };
 

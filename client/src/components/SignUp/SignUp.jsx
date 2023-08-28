@@ -1,6 +1,6 @@
 import "./SignUp.css"
-import { useDispatch, useSelector } from 'react-redux';
-import { createNewUser } from '../../redux-toolkit/features/users/userSlice';
+import { useDispatch } from 'react-redux';
+import { createNewUser } from '../../redux-toolkit/actions/users';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { useState } from "react";
@@ -23,11 +23,16 @@ const SignUp = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(createNewUser({ ...formData }));
-    navigate("/signin");
+    try {
+      await createNewUser({ ...formData });
+      navigate("/signin");
+    } catch (error) {
+      toast.error(error.response.data.message)
+    }
   };
+
 
   return (
     <div className="signup-container">
