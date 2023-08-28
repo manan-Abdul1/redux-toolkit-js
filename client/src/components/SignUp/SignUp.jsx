@@ -1,6 +1,6 @@
 import "./SignUp.css"
-import { useDispatch, useSelector } from 'react-redux';
-import { createNewUser } from '../../redux-toolkit/features/users/userSlice';
+import { useDispatch } from 'react-redux';
+import { createNewUser } from '../../redux-toolkit/actions/users';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { useState } from "react";
@@ -35,19 +35,18 @@ const SignUp = () => {
       try {
         const uploadUrl = 'https://api.cloudinary.com/v1_1/dipdjdhic/image/upload';
         const uploadResponse = await axios.post(uploadUrl, userFormData);
-        
-        dispatch(createNewUser({ ...formData, imageUrl: uploadResponse.data.secure_url }));
+        await createNewUser({ ...formData, imageUrl: uploadResponse.data.secure_url  });
         navigate('/signin');
       } catch (error) {
         toast.error('Error signing up. Please try again.');
       }
     } else {
       // User did not upload an image
-      dispatch(createNewUser({ ...formData }));
-      navigate('/signin');
+      await createNewUser({ ...formData });
+        navigate('/signin');
     }
   };
-  
+
 
   return (
     <div className="signup-container">

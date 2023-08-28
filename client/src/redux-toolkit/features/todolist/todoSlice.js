@@ -18,8 +18,11 @@ const todoSlice = createSlice({
             state.todoList = [...state.todoList, action.payload]
         },
         editTodoTask: (state, action) => {
-            const newList = state.todoList.filter(todo => todo._id !== action.payload._id);
-            state.todoList = [...newList, action.payload]
+            const {_id, description } = action.payload;
+            const todo = state.todoList.find((todo) => todo._id === _id);
+            if (todo) {
+                todo.description = description;
+            }
         },
         completedTodoTask: (state, action) => {
             const taskId = action.payload;

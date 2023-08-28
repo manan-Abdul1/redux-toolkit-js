@@ -1,20 +1,9 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     user: {},
     isLoggedIn: false,
 }
-
-export const createNewUser = createAsyncThunk('user/createNewUser', async (newUserObj) => {
-    try {
-        await axios.post("http://localhost:5500/user/createNewUser", newUserObj);
-    } catch (error) {
-        return error.response.data.error;
-    }
-})
-
-
 
 const userSlice = createSlice({
     name: 'user',
