@@ -1,61 +1,75 @@
 /* Navbar.css */
 
 .navbar {
-    /* background-color: #333; */
-    /* color: white; */
-    padding: 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-  }
-  
-  .profile {
-    position: relative;
-    cursor: pointer;
-  }
+  background-color: #333;
+  color: white;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-  .fa-solid{
-    margin-left: 5px;
-  }
-  
-  .username {
-    font-size: 1.2rem;
-    display: flex;
-    align-items: center;
-    margin-right: 30px;
-    text-transform: capitalize;
-  }
-  
-  .dropdown {
-    position: absolute;
-    top: 100%;
-    right: 20px;
-    /* background-color: #333; */
-    /* color: white; */
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    z-index: 1;
-  }
-  
-  .email {
-    text-align: justify;
-    font-size: 1rem;
-    margin-bottom: 0.5rem;
-  }
-  
-  .signout {
-    font-size: 1rem;
-    cursor: pointer;
-  }
-  
-  .signout:hover {
-    color: #ff6b6b;
-  }
-  
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.profile {
+  position: relative;
+  cursor: pointer;
+}
+
+.fas {
+  margin-left: 5px;
+}
+
+.username {
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  margin-right: 30px;
+  text-transform: capitalize;
+  cursor: pointer;
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  right: 20px;
+  background-color: #fff;
+  color: #333;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  z-index: 1;
+}
+
+.dropdown-link {
+  color: #333;
+  text-decoration: none;
+  margin-bottom: 10px;
+  transition: color 0.2s;
+}
+
+.dropdown-link:hover {
+  color: #ff6b6b;
+}
+
+.email {
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.signout {
+  font-size: 1rem;
+  cursor: pointer;
+  color: #ff6b6b;
+  transition: color 0.2s;
+}
+
+.signout:hover {
+  color: #d63447;
+}
