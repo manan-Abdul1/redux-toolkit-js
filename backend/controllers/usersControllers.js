@@ -33,7 +33,7 @@ const createNewUser = async (req, res) => {
 
 const getAllUsers = async (req, res) => {
     try {
-        const users = await userModel.find();
+        const users = await userModel.find().select("-password");
         res.status(200).json(users);
 
     } catch (error) {

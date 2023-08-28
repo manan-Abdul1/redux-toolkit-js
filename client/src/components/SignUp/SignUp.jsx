@@ -4,11 +4,13 @@ import { createNewUser } from '../../redux-toolkit/features/users/userSlice';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { useState } from "react";
+import axios from "axios";
 
 
 const SignUp = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [image, setImage] = useState(null);
   const [formData, setFormData] = useState({
     username: '',
     email: '',
@@ -23,11 +25,29 @@ const SignUp = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(createNewUser({ ...formData }));
-    navigate("/signin");
+    if (e.target.files) {
+      const userFormData = new FormData();
+      userFormData.append('file', image);
+      userFormData.append('upload_preset', 'ymnrcjst');
+        
+      try {
+        const uploadUrl = 'https://api.cloudinary.com/v1_1/dipdjdhic/image/upload';
+        const uploadResponse = await axios.post(uploadUrl, userFormData);
+        
+        dispatch(createNewUser({ ...formData, imageUrl: uploadResponse.data.secure_url }));
+        navigate('/signin');
+      } catch (error) {
+        toast.error('Error signing up. Please try again.');
+      }
+    } else {
+      // User did not upload an image
+      dispatch(createNewUser({ ...formData }));
+      navigate('/signin');
+    }
   };
+  
 
   return (
     <div className="signup-container">
@@ -37,6 +57,7 @@ const SignUp = () => {
           type="text"
           name="username"
           placeholder="Username"
+          required
           value={formData.username}
           onChange={handleInputChange}
         />
@@ -44,6 +65,7 @@ const SignUp = () => {
           type="email"
           name="email"
           placeholder="Email"
+          required
           value={formData.email}
           onChange={handleInputChange}
         />
@@ -51,8 +73,16 @@ const SignUp = () => {
           type="password"
           name="password"
           placeholder="Password"
+          required
           value={formData.password}
           onChange={handleInputChange}
+        />
+         <input
+          id="image"
+          type="file"
+          name="image"
+          accept=".jpeg, .jpg, .png"
+          onChange={(e) => setImage(e.target.files[0])}
         />
         <button type="submit">Sign Up</button>
       </form>
