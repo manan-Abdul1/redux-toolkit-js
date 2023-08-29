@@ -86,13 +86,12 @@ const SignUp = () => {
           <div className="other-options">
             <div className="flex">
               <input type="checkbox" />
-              Remember me</div>
-              
-            <a href="/forgot-password">Forgot password?</a>
+              I agree to the Terms of Services.
+            </div>
           </div>
           <button type="submit">Sign Up</button>
         </form>
-      
+
         <div class="line"></div>
 
         <div class="media-options">
@@ -101,9 +100,22 @@ const SignUp = () => {
             <span>Login with Google</span>
           </a>
         </div>
+        <div class="media-options github1">
+          <a href="" class="field github">
+            <i class="fa-brands fa-github"></i>
+            <span>Login with GitHub</span>
+          </a>
+        </div>
       </div>
     </div>
   );
 };
 
 export default SignUp;
+{/* <div className="other-options">
+<div className="flex">
+  <input type="checkbox" />
+  Remember me</div>
+
+<a href="/forgot-password">Forgot password?</a>
+</div> */}

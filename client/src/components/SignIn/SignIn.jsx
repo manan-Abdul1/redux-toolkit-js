@@ -28,25 +28,63 @@ const SignIn = () => {
 
   return (
     <div className="signin-container">
-      <h2>Sign In</h2>
-      <form onSubmit={handleSubmit} className="signin-form" autoComplete='off'>
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleInputChange}
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleInputChange}
-        />
-        <button type="submit">Sign In</button>
-        <p onClick={() => navigate('/signup')} style={{ cursor: "pointer" }}>Create new account? Register</p>
-      </form>
+      <div className='sigin-wrap-up'>
+        <span className='sigin-heading'>ACCOUNT LOGIN</span>
+        <div className="media-options media-sigin">
+          <a href="" className="field google">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="" className="google-img" />
+            <span>Login with Google</span>
+          </a>
+        </div>
+        <div className="media-options github1 media-sigin">
+          <a href="" className="field github">
+            <i className="fa-brands fa-github"></i>
+            <span>Login with GitHub</span>
+          </a>
+        </div>
+
+        <form onSubmit={handleSubmit} className="signin-form" autoComplete='off'>
+        <div className="input-container">
+            <label htmlFor="email" className="input-label">
+              Email
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleInputChange}
+            />
+          </div>
+
+          <div className="input-container">
+            <label htmlFor="password" className="input-label">
+              Password
+            </label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={formData.password}
+              onChange={handleInputChange}
+            />
+          </div>
+
+
+          <div className="other-options">
+            <div className="flex">
+              <input type="checkbox" />
+              Remember me</div>
+            <div>
+              <a href="#">Forgot password?</a>
+            </div>
+          </div>
+          <button type="submit">Sign In</button>
+          <p>Not a member?
+            <span onClick={() => navigate('/signup')} className="register-link">{' '}Register </span>
+          </p>
+        </form>
+      </div>
     </div>
 
   );

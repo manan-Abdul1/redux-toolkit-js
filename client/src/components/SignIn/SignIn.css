@@ -1,20 +1,105 @@
 .signin-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .signin-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    width: 300px;
-    padding: 30px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #ebebeb;
+}
+
+.sigin-wrap-up {
+  width: 600px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 40px 0px;
+  text-align: center;
+}
+
+.sigin-heading {
+  font-size: 30px;
+  color: #555;
+  line-height: 1.2;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.signin-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 45%;
+  margin: 0 auto;
+}
+
+.input-label {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+.signin-form input {
+  width: 100%;
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  height: 40px;
+  font-size: 15px;
+  transition: border-color 0.3s ease-in;
+}
+.signin-form input:focus {
+  border-color: #445069; 
+  outline: none;
+}
+
+.signin-form button{
+  width: 45%;
+  padding: 15px ;
+  border-radius: 5px;
+  font-size: 15px;
+  background-color: #212529;
+}
+.signin-form button:hover{
+  background-color: #555;
+}
+.signin-form .other-options{
+  width: 45%;
+  margin-top: 0px;
+  font-size: 13px;
+}
+.signin-form .other-options .flex{
+  color: #999;
+}
+.media-sigin{
+  margin-bottom: 0px;
+  width: fit-content;
+  margin: 0 auto;
+}
+.signin-form .other-options a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+.signin-form .other-options a:hover {
+  text-decoration: underline;
+}
+.signin-form p{
+  color: #999;
+}
+.signin-form .register-link {
+  color: #007bff;
+  cursor: pointer;
+}
+.signin-form .register-link:hover{
+  text-decoration: underline;
+}
