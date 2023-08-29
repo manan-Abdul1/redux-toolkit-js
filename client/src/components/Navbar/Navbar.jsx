@@ -33,11 +33,11 @@ function Navbar() {
         {showDropdown && (
           <div className="dropdown">
             <NavLink to='/profile' className="dropdown-link">Profile</NavLink>
-            <div className="email">
+            {/* <div className="email">
               <strong>Email:</strong> {usersData.email}
-            </div>
+            </div> */}
             <div className="signout" onClick={handleSignOut}>
-              Sign Out
+            <i class="fa-solid fa-right-from-bracket "></i>
             </div>
           </div>
         )}

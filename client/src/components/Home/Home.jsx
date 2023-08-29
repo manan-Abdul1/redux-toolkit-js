@@ -4,10 +4,10 @@ import TodoList from "../TodoList/TodoList";
 function Home() {
   
   return (
-    <div className='center'>
+    <>
       <Navbar />
       <TodoList />
-    </div>
+    </>
   );
 }
 

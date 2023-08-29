@@ -43,20 +43,24 @@ function TaskItem({ task }) {
                         value={editedDescription}
                         onChange={(e) => setEditedDescription(e.target.value)}
                     />
-                    <button className="save-button" disabled={loading} onClick={handleEditSave}>Save</button>
-                    <button className="cancel-button" onClick={handleEditCancel}>Cancel</button>
+                    <div>
+                        <button className="save-button" disabled={loading} onClick={handleEditSave}><i class="fa-solid fa-floppy-disk"></i></button>
+                        <button className="cancel-button" onClick={handleEditCancel}><i class="fa-solid fa-ban"></i></button>
+                    </div>
                 </>
             ) : (
                 <>
-                    <span className={`task-item-title ${task.completed ? 'completed' : ''} `}>
-                        {task.description}
-                    </span>
-                    <div className="task-buttons">
-                        <button className="edit-button" onClick={handleEditClick}>Edit</button>
+                    <div>
                         <button className="complete-button" disabled={loading} onClick={handleToggleComplete}>
-                            {task.completed ? 'Uncomplete' : 'Complete'}
+                            {task.completed ? (<i className="fa-solid fa-xmark"></i>) : (<i className="fa-solid fa-check"></i>)}
                         </button>
-                        <button className="delete-button" disabled={loading} onClick={handleDelete}>Delete</button>
+                        <span className={`task-item-title ${task.completed ? 'completed' : ''} `}>
+                            {task.description}
+                        </span>
+                    </div>
+                    <div className="task-buttons">
+                        <button className="edit-button" onClick={handleEditClick}><i class="fa-solid fa-pen-to-square"></i></button>
+                        <button className="delete-button" disabled={loading} onClick={handleDelete}><i class="fa-solid fa-trash"></i></button>
                     </div>
                 </>
             )}
