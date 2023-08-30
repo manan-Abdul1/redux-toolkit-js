@@ -7,7 +7,7 @@
 }
 
 .sigin-wrap-up {
-  width: 600px;
+  width: 400px;
   background: #fff;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -36,7 +36,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  width: 45%;
+  width: 75%;
   margin: 0 auto;
 }
 
@@ -63,7 +63,7 @@
 }
 
 .signin-form button{
-  width: 45%;
+  width: 75%;
   padding: 15px ;
   border-radius: 5px;
   font-size: 15px;
@@ -73,7 +73,7 @@
   background-color: #555;
 }
 .signin-form .other-options{
-  width: 45%;
+  width: 75%;
   margin-top: 0px;
   font-size: 13px;
 }
