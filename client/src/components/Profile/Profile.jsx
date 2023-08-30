@@ -5,11 +5,12 @@ import { useSelector } from 'react-redux';
 import { toast } from 'react-hot-toast';
 import { CLOUDNIARY_IMG_URL } from '../../utils/serverUrl';
 import { apiRequest } from '../../utils/axios';
+import Navbar from '../Navbar/Navbar';
 
 const Profile = () => {
-  const userId = useSelector(state => state.users.user.id)
-  const userEmail = useSelector(state => state.users.user.email)
-  const userName = useSelector(state => state.users.user.username)
+  const userId = useSelector(state => state.users.user.id);
+  const userEmail = useSelector(state => state.users.user.email);
+  const userName = useSelector(state => state.users.user.username);
   const [image, setImage] = useState(null);
   const [username, setUsername] = useState(userName);
   const [email, setEmail] = useState(userEmail);
@@ -32,40 +33,53 @@ const Profile = () => {
       });
 
       if (userUpdateResponse.status === 200) {
-        toast.success("User Updated Successfully")
+        toast.success("User Updated Successfully");
       }
     } catch (error) {
       console.error('Error uploading image and updating user:', error);
     }
   };
 
-
   return (
-    <div className="profile-container">
-      <h2>Profile Page</h2>
-      <form className="profile-image-container" onSubmit={handleUpload}>
-        <input
-          type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          id="image"
-          type="file"
-          name="image"
-          accept=".jpeg, .jpg, .png"
-          onChange={(e) => setImage(e.target.files[0])}
-        />
-        <button type="submit">Upload</button>
-      </form>
-    </div>
+    <>
+      <Navbar/>
+      <div className="profile-container">
+        <h2>Edit Profile</h2>
+        <form className="profile-form" onSubmit={handleUpload}>
+          <div className="image-profile-container">
+            <div className="image-preview">
+              {image ? (
+                <img src={URL.createObjectURL(image)} alt="Preview" className="image" />
+              ) : (
+                <div className="add-image-label">Add Image</div>
+              )}
+            </div>
+            <input
+              id="image"
+              type="file"
+              name="image"
+              accept=".jpeg, .jpg, .png"
+              onChange={(e) => setImage(e.target.files[0])}
+            />
+          </div>
+          <input
+            className="profile-input"
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <input
+            className="profile-input"
+            type="text"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <button className="profile-button" type="submit">Save Changes</button>
+        </form>
+      </div>
+    </>
   );
 };
 

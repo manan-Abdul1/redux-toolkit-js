@@ -44,8 +44,8 @@ function TaskItem({ task }) {
                         onChange={(e) => setEditedDescription(e.target.value)}
                     />
                     <div>
-                        <button className="save-button" disabled={loading} onClick={handleEditSave}><i class="fa-solid fa-floppy-disk"></i></button>
-                        <button className="cancel-button" onClick={handleEditCancel}><i class="fa-solid fa-ban"></i></button>
+                        <button className="save-button" disabled={loading} onClick={handleEditSave}><i className="fa-solid fa-floppy-disk"></i></button>
+                        <button className="cancel-button" onClick={handleEditCancel}><i className="fa-solid fa-ban"></i></button>
                     </div>
                 </>
             ) : (
@@ -59,8 +59,8 @@ function TaskItem({ task }) {
                         </span>
                     </div>
                     <div className="task-buttons">
-                        <button className="edit-button" onClick={handleEditClick}><i class="fa-solid fa-pen-to-square"></i></button>
-                        <button className="delete-button" disabled={loading} onClick={handleDelete}><i class="fa-solid fa-trash"></i></button>
+                        <button className="edit-button" onClick={handleEditClick}><i className="fa-solid fa-pen-to-square"></i></button>
+                        <button className="delete-button" disabled={loading} onClick={handleDelete}><i className="fa-solid fa-trash"></i></button>
                     </div>
                 </>
             )}

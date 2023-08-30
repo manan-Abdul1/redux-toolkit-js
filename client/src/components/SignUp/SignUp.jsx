@@ -92,17 +92,17 @@ const SignUp = () => {
           <button type="submit">Sign Up</button>
         </form>
 
-        <div class="line"></div>
+        <div className="line"></div>
 
-        <div class="media-options">
-          <a href="" class="field google">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="" class="google-img" />
+        <div className="media-options">
+          <a href="" className="field google">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="" className="google-img" />
             <span>Login with Google</span>
           </a>
         </div>
-        <div class="media-options github1">
-          <a href="" class="field github">
-            <i class="fa-brands fa-github"></i>
+        <div className="media-options github1">
+          <a href="" className="field github">
+            <i className="fa-brands fa-github"></i>
             <span>Login with GitHub</span>
           </a>
         </div>
@@ -112,10 +112,3 @@ const SignUp = () => {
 };
 
 export default SignUp;
-{/* <div className="other-options">
-<div className="flex">
-  <input type="checkbox" />
-  Remember me</div>
-
-<a href="/forgot-password">Forgot password?</a>
-</div> */}

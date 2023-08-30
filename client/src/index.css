@@ -5,8 +5,11 @@
 }
 body{
   margin: 0;
-
-  /* background-color: #3c3939; */
-
-  /* background-color: #333; */
+  padding: 0;
+}
+button {
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
 }

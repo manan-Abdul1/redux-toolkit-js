@@ -4,12 +4,13 @@ import './Navbar.css';
 import { toast } from 'react-hot-toast';
 import { resetTodoList } from '../../redux-toolkit/features/todolist/todoSlice';
 import { logout } from '../../redux-toolkit/features/users/userSlice';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 function Navbar() {
+  const [showDropdown, setShowDropdown] = useState(false);
   const usersData = useSelector(state => state.users.user);
   const dispatch = useDispatch();
-  const [showDropdown, setShowDropdown] = useState(false);
+  const navigate = useNavigate();
 
   const handleSignOut = () => {
     dispatch(logout());
@@ -23,7 +24,7 @@ function Navbar() {
 
   return (
     <nav className="navbar">
-      <div className="logo">
+      <div className="logo" onClick={()=>navigate('/')}>
         Logo
       </div>
       <div className="profile">
@@ -37,7 +38,7 @@ function Navbar() {
               <strong>Email:</strong> {usersData.email}
             </div> */}
             <div className="signout" onClick={handleSignOut}>
-            <i class="fa-solid fa-right-from-bracket "></i>
+            <i className="fa-solid fa-right-from-bracket "></i>
             </div>
           </div>
         )}
