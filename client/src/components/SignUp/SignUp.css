@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   padding: 10px;
+  /* flex-wrap: wrap; */
   /* justify-content: space-between; */
   /* justify-content: center; */
 }
@@ -141,4 +142,24 @@ a.google span{
   display: flex;
   align-items: center;
   text-wrap: nowrap;
+}
+
+@media (max-width:768px) {
+  .signup-container{
+    flex-direction: column;
+    /* max-width: 300px; */
+  }
+  .image-container img{
+    width: auto;
+  }
+  .form-container{
+    margin-top: 20px;
+    width: auto;
+    height: 550px;
+  }
+  .form-container h2{
+    left: 20px;
+    top: -10px;
+    font-size: 30px;
+  }
 }

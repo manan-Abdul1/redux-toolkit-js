@@ -84,6 +84,16 @@
   margin-bottom: 0px;
   width: fit-content;
   margin: 0 auto;
+  border: 1px solid #ccc;
+  padding: 10px 75px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+.media-sigin a{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
 }
 .signin-form .other-options a {
   text-decoration: none;
@@ -102,4 +112,16 @@
 }
 .signin-form .register-link:hover{
   text-decoration: underline;
+}
+@media (max-width:768px) {
+  .sigin-wrap-up{
+    max-width: 300px;
+  }
+  .sigin-heading{
+    font-size: 25px;
+  }
+  .media-sigin{
+    padding-left: 40px;
+    padding-right: 40px;
+  }
 }
