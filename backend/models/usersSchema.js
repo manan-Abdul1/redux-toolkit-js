@@ -11,11 +11,15 @@ const usersSchema = new Schema({
     },
     password: {
      type: String,
-     required: true
+     required: false
     },
     imageUrl: {
       type: String,
       required:false
+    },
+    isGoogleAuth: {
+      type: Boolean,
+      required:true
     }
   });
 const userModel = mongoose.model('users', usersSchema);

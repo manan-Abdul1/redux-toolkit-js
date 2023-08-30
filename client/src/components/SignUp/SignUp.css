@@ -149,6 +149,9 @@ a.google span{
     flex-direction: column;
     /* max-width: 300px; */
   }
+  .image-container{
+    display: none; 
+  }
   .image-container img{
     width: auto;
   }
@@ -156,6 +159,7 @@ a.google span{
     margin-top: 20px;
     width: auto;
     height: 550px;
+    margin-left: 0px;
   }
   .form-container h2{
     left: 20px;

@@ -5,6 +5,8 @@ import { createNewUser } from '../../redux-toolkit/actions/users';
 import { apiRequest } from "../../utils/axios";
 import { CLOUDNIARY_IMG_URL } from "../../utils/serverUrl";
 import "./SignUp.css";
+import { GoogleLogin } from '@react-oauth/google';
+import jwt_decode from "jwt-decode";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -13,6 +15,7 @@ const SignUp = () => {
     username: '',
     email: '',
     password: '',
+    isGoogleAuth: false,
   });
 
   const handleInputChange = (e) => {
@@ -21,6 +24,27 @@ const SignUp = () => {
       ...formData,
       [name]: value,
     });
+  };
+
+  const handleGoogleSuccess = async (response) => {
+    const { credential } = response;
+    var decoded = jwt_decode(credential);
+    const { name, email, picture } = decoded;
+    const newUser = {
+      username: name,
+      email: email,
+      imageUrl: picture,
+      isGoogleAuth: true
+    };
+    try {
+      await createNewUser(newUser);
+      navigate('/signin');
+    } catch (error) {
+      toast.error('Error signing up with Google. Please try again.');
+    }
+  };
+  const handleGoogleFailure = (error) => {
+    toast.error('Error signing up with Google. Please try again.');
   };
 
   const handleSubmit = async (e) => {
@@ -32,7 +56,7 @@ const SignUp = () => {
 
       try {
         const uploadResponse = await apiRequest(CLOUDNIARY_IMG_URL, 'post', userFormData);
-        await createNewUser({ ...formData, imageUrl: uploadResponse.data.secure_url });
+        await createNewUser({ ...formData, imageUrl: uploadResponse.data.secure_url, isGoogleAuth: false});
         navigate('/signin');
       } catch (error) {
         toast.error('Error signing up. Please try again.');
@@ -94,12 +118,17 @@ const SignUp = () => {
 
         <div className="line"></div>
 
-        <div className="media-options">
+        <GoogleLogin
+          text="signup_with"
+          onSuccess={handleGoogleSuccess}
+          onError={handleGoogleFailure}
+        />
+        {/* <div className="media-options">
           <a href="" className="field google">
             <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="" className="google-img" />
             <span>Login with Google</span>
           </a>
-        </div>
+        </div> */}
         <div className="media-options github1">
           <a href="" className="field github">
             <i className="fa-brands fa-github"></i>
