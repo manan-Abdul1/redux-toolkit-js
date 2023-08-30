@@ -2,12 +2,15 @@
 
 .todolist-container {
   max-width: 400px;
-  margin: 0 auto;
+  margin: 20px auto;
   padding: 20px;
   border: 1px solid #ccc;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
   padding-top: 0;
+  background-color: white;
+  /* background-color: #3c3a3a; */
+/* color: white; */
 }
 
 .todolist-container h1 {
@@ -30,11 +33,15 @@
 
 .add-task-form input {
   flex: 1;
-  padding: 8px;
+  padding: 12px;
   border: 1px solid #ccc;
   border-radius: 5px 0 0 5px;
+  transition: border-color 0.3s ease-in;
 }
-
+.add-task-form input:focus {
+  border-color: #445069; 
+  outline: none;
+}
 .add-task-form button {
   background-color: #007bff;
   color: white;
@@ -70,7 +77,6 @@
 .edit-button {
   background-color: #2ac6d1;
   /* padding: 0.75rem 0.5rem; */
-
 }
 
 .edit-button:hover {
@@ -79,6 +85,7 @@
 
 
 .complete-button {
+  margin-right: 10px;
   /* padding: 0.75rem 0.5rem; */
   background-color: #333;
   color: white;
@@ -127,6 +134,14 @@
 .editing-input {
   padding: 10px;
   margin-right: 5px;
+  width: 60%;
+  transition: border-color 0.3s ease-in-out;
+  border-radius: 5px;
+  border: 1px solid;
+}
+.editing-input:focus {
+  border: 1px solid #445069;
+  outline: none;
 }
 .loading{
   text-align: center;

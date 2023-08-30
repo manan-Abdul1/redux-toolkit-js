@@ -1,43 +1,165 @@
 .signup-container {
   display: flex;
+  align-items: center;
+  padding: 10px;
+  /* flex-wrap: wrap; */
+  /* justify-content: space-between; */
+  /* justify-content: center; */
+}
+.image-container img{
+  width: 650px;
+  height: 750px;
+  border-radius: 20px;
+}
+.form-container {
+  padding: 30px;
+  margin-left: 30px;
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  border: 1px solid #f0f0f0;
+  border-radius: 20px;
+  width: 50%;
+  height: 692px;
+  position: relative;
 }
 
 .signup-form {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 10px;
   width: 300px;
-  padding: 30px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-input {
+.signup-form input {
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
 
-button {
-  padding: 10px 20px;
+.signup-form button {
+  padding: 12px 20px;
   background-color: #007bff;
   color: #fff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  width: 100%;
 }
 
-button:hover {
+.signup-form button:hover {
   background-color: #0056b3;
 }
 
-h2 {
-  margin-bottom: 20px;
+.form-container h2 {
+  position: absolute;
+  top: 50px;
+  left: 210px;
+  font-size: 35px;
+  /* text-align: left; */
+  /* margin-bottom: 20px; */
+}
+.remember-me {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 5px;
+}
+
+.other-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  width: 100%;
+}
+.other-options label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+}
+.line{
+  position: relative;
+  height: 1px;
+  width: 40%;
+  margin: 36px 0;
+  background-color: #d4d4d4;
+}
+.line::before{
+  content: 'Or';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #FFF;
+  color: #8b8b8b;
+  padding: 0 15px;
+}
+.media-options a{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+.media-options {
+  border: 1px solid #ccc;
+  padding: 10px 75px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+.github1{
+  background-color: #0D1117;
+  color: white;
+}
+.github-img{
+background-color: #fff;
+}
+a.github span{
+  color: #fff;
+  font-weight: 500;
+  font-size: 14px;
+  text-decoration: none;
+  margin-left: 3px;
+}
+a.google span{
+  font-weight: 500;
+  font-size: 14px;
+  color: black;
+  text-decoration: none;
+  margin-left: 2px;
+}
+.fa-github{
+  font-size: 25px;
+  color: #fff;
+}
+.flex{
+  display: flex;
+  align-items: center;
+  text-wrap: nowrap;
+}
+
+@media (max-width:768px) {
+  .signup-container{
+    flex-direction: column;
+    /* max-width: 300px; */
+  }
+  .image-container img{
+    width: auto;
+  }
+  .form-container{
+    margin-top: 20px;
+    width: auto;
+    height: 550px;
+  }
+  .form-container h2{
+    left: 20px;
+    top: -10px;
+    font-size: 30px;
+  }
 }

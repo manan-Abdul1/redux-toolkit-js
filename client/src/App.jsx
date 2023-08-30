@@ -6,6 +6,7 @@ import { Routes, Route, useLocation, useNavigate } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
 import { useEffect } from 'react'
 import Profile from './components/Profile/Profile'
+import Navbar from './components/Navbar/Navbar'
 
 
 function App() {

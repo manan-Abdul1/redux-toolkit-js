@@ -19,7 +19,7 @@ function AddTask({ onAddTask }) {
         value={task}
         onChange={(e) => setTask(e.target.value)}
       />
-      <button type="submit">Add Task</button>
+      <button type="submit"><i className="fa-solid fa-plus"></i></button>
     </form>
   );
 }

@@ -4,7 +4,6 @@ import AddTask from './AddTask';
 import { useDispatch, useSelector } from 'react-redux';
 import TaskItem from './TaskItem';
 import { fetchTasks, createNewTask } from '../../redux-toolkit/actions/todolist';
-import Loader from "../Loader/Loader"
 
 function TodoList() {
     const dispatch = useDispatch();
