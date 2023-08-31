@@ -12,26 +12,26 @@ const createNewUser = async (req, res) => {
             return res.status(400).json({ message: "User already exists!" });
         }
 
-        if(password!==undefined){
+        if (password !== undefined) {
             const saltRounds = 10;
             const hashedPassword = await bcrypt.hash(password, saltRounds);
-    
-    
+
+
             const newUser = new userModel({
                 ...req.body,
                 password: hashedPassword
             });
-    
+
             const savedUser = await newUser.save();
             return res.status(201).json(savedUser);
         }
-        const newUser = new userModel({...req.body});
+        const newUser = new userModel({ ...req.body });
         const savedUser = await newUser.save();
         return res.status(201).json(savedUser);
 
     } catch (error) {
         console.error("Error:", error);
-        res.status(500).json( { message: error._message });
+        res.status(500).json({ message: error._message });
     }
 };
 
@@ -49,9 +49,14 @@ const signInUser = async (req, res) => {
     try {
         const { email, password } = req.body;
         const user = await userModel.findOne({ email: email });
-
         if (!user) {
             return res.status(401).json({ message: 'User not found' });
+        }
+        if (password === undefined) {
+            return res.status(200).json({ message: 'User authenticated', user: { email: user.email, id: user._id, username: user.username, token: createAuthorizationToken(user) } });
+        }
+        if (user.isGoogleAuth) {
+            return res.status(401).json({ message: 'User not Authenticated' });
         }
 
         const isPasswordValid = await bcrypt.compare(password, user.password);

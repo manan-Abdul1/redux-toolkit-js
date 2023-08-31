@@ -2,7 +2,10 @@ import React, { useState } from 'react';
 import "./SignIn.css";
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { signIn } from '../../redux-toolkit/actions/users';
+import { signIn, signInWithGoogle } from '../../redux-toolkit/actions/users';
+import { GoogleLogin } from '@react-oauth/google';
+import jwt_decode from "jwt-decode";
+
 
 
 const SignIn = () => {
@@ -20,7 +23,17 @@ const SignIn = () => {
       [name]: value,
     });
   };
+  const handleGoogleSuccess = async (response) => {
+    const { credential } = response;
+    const decoded = jwt_decode(credential);
+    const { email } = decoded;
+    dispatch(signInWithGoogle(email))
+  };
 
+  const handleGoogleFailure = (error) => {
+    console.error('Error signing in with Google:', error);
+    // Handle Google login failure
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(signIn(formData))
@@ -30,12 +43,17 @@ const SignIn = () => {
     <div className="signin-container">
       <div className='sigin-wrap-up'>
         <span className='sigin-heading'>ACCOUNT LOGIN</span>
-        <div className="media-sigin">
+        <GoogleLogin
+          text="Login with Google"
+          onSuccess={handleGoogleSuccess}
+          onFailure={handleGoogleFailure}
+        />
+        {/* <div className="media-sigin">
           <a href="" className="field google">
             <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="" className="google-img" />
             <span>Login with Google</span>
           </a>
-        </div>
+        </div> */}
         <div className="github1 media-sigin">
           <a href="" className="field github">
             <i className="fa-brands fa-github"></i>

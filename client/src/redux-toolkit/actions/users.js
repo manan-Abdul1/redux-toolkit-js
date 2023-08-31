@@ -7,3 +7,8 @@ export const signIn = ({ email, password }) => (dispatch) => {
 };
 
 export const createNewUser = async (newUserObj) => apiRequest(`user/createNewUser`, 'post', newUserObj)
+
+export const signInWithGoogle = (email) => (dispatch) => {
+    apiRequest(`user/signin`, 'post', { email })
+        .then(response => dispatch(setLoggedIn(response.data.user)));
+};
