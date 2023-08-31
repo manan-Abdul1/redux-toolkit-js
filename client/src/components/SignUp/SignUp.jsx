@@ -123,12 +123,6 @@ const SignUp = () => {
           onSuccess={handleGoogleSuccess}
           onError={handleGoogleFailure}
         />
-        {/* <div className="media-options">
-          <a href="" className="field google">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="" className="google-img" />
-            <span>Login with Google</span>
-          </a>
-        </div> */}
         <div className="media-options github1">
           <a href="" className="field github">
             <i className="fa-brands fa-github"></i>
