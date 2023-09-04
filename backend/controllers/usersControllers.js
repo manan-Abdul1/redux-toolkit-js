@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const userModel = require("../models/usersSchema");
-const { createAuthorizationToken } = require("../utils/jwt")
+const { createAuthorizationToken } = require("../utils/jwt");
 
 const createNewUser = async (req, res) => {
     try {
@@ -59,7 +59,7 @@ const signInUser = async (req, res) => {
             return res.status(401).json({ message: 'User not Authenticated' });
         }
 
-        const isPasswordValid = await bcrypt.compare(password, user.password);
+        const isPasswordValid = bcrypt.compare(password, user.password);
 
         if (!isPasswordValid) {
             return res.status(401).json({ message: 'Incorrect password' });
