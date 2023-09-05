@@ -20,6 +20,10 @@ const usersSchema = new Schema({
     isGoogleAuth: {
       type: Boolean,
       required:true
+    },
+    customerId: {
+      type: String,
+      required:false
     }
   });
 const userModel = mongoose.model('users', usersSchema);

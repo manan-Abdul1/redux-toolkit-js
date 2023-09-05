@@ -28,7 +28,7 @@
     font-size: 0.7em;
 }
 
-button {
+.custom-card-form button {
     background: var(--accent-color);
     border-radius: var(--radius);
     color: white;
@@ -41,16 +41,16 @@ button {
     display: block;
 }
 
-button:hover {
+.custom-card-form button:hover {
     filter: contrast(115%);
 }
 
-button:active {
+.custom-card-form button:active {
     transform: translateY(0px) scale(0.98);
     filter: brightness(0.9);
 }
 
-button:disabled {
+.custom-card-form button:disabled {
     opacity: 0.5;
     cursor: none;
 }
@@ -99,4 +99,24 @@ td:nth-child(3) {
 
 .error-message {
     color: red;
+}
+
+.payment-method-selector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin: 50px auto;
+}
+
+.payment-method-dropdown {
+    padding: 10px;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+
+.add-card-button:hover {
+    background-color: #0056b3;
 }

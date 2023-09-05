@@ -53,7 +53,7 @@ const signInUser = async (req, res) => {
             return res.status(401).json({ message: 'User not found' });
         }
         if (password === undefined) {
-            return res.status(200).json({ message: 'User authenticated', user: { email: user.email, id: user._id, username: user.username, token: createAuthorizationToken(user) } });
+            return res.status(200).json({ message: 'User authenticated' });
         }
         if (user.isGoogleAuth) {
             return res.status(401).json({ message: 'User not Authenticated' });
@@ -66,7 +66,7 @@ const signInUser = async (req, res) => {
         }
 
         // Password is correct, user is authenticated
-        res.status(200).json({ message: 'User authenticated', user: { email: user.email, id: user._id, username: user.username, token: createAuthorizationToken(user) } });
+        res.status(200).json({ message: 'User authenticated', user: { email: user.email, customerId:user?.customerId, id: user._id, username: user.username, token: createAuthorizationToken(user) } });
     } catch (error) {
         console.error('Error:', error);
         res.status(500).json({ error: 'An error occurred while signing in' });
