@@ -7,6 +7,8 @@ import { Toaster } from 'react-hot-toast'
 import { useEffect } from 'react'
 import Profile from './components/Profile/Profile'
 import Navbar from './components/Navbar/Navbar'
+import PaymentForm from './components/PaymentForm/PaymentForm'
+import CreateCardPayment from './components/PaymentForm/CreateCardPayment'
 
 
 function App() {
@@ -30,6 +32,7 @@ function App() {
         <Route path='signup' element={<SignUp />} />
         <Route path='signin' element={<SignIn />} />
         <Route path='profile' element={<Profile />} />
+        <Route path='paymentform' element={<CreateCardPayment/>} />
       </Routes>
       <Toaster position="top-right" />
     </>

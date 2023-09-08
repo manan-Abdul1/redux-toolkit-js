@@ -6,6 +6,7 @@ const PORT = process.env.PORT || 8000;
 const connectDB = require("./config/db")
 const taskRoutes = require("./routes/taskRoutes")
 const usersRoutes = require("./routes/usersRoutes")
+const paymentRoutes = require("./routes/paymentRoutes")
 
 connectDB();
 const app = express();
@@ -14,6 +15,8 @@ app.use(bodyParser.json());
 
 app.use('/api',taskRoutes)
 app.use('/user', usersRoutes)
+app.use('/payment', paymentRoutes)
+
 
 
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
