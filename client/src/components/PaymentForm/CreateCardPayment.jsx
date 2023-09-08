@@ -4,6 +4,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import PaymentForm from "./PaymentForm";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import SubscriptionForm from "./SubscriptionForm";
 
 const stripePromise = loadStripe('pk_test_51KnkeqIqyrZ1HZmgUEhmVWrDqSZ5qqjzQy5rgeY5YoACMA0Y9MEBVMLK1ppgtb3kJd1x5JhWt96Jvo6qyIBnzkLo00MdZdGSJS');
 
@@ -33,6 +34,7 @@ const CreateCardPayment = () => {
   return (
     <Elements stripe={stripePromise}>
       <PaymentForm paymentMethods={paymentMethods} />
+      {/* <SubscriptionForm/> */}
     </Elements>
   );
 };

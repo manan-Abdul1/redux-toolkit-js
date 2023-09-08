@@ -15,6 +15,9 @@ const inputStyle = {
     fontWeight: 'bolder',
     // paddingLeft: '20px'
   },
+  "focus":{
+  color:"red !important"
+  }
   // padding: '10px'
 }
 
@@ -42,7 +45,7 @@ const PaymentForm = ({ paymentMethods }) => {
 
     try {
       const cardElement = elements.getElement(CardNumberElement);
-
+      // const cardElement: CardNumberElement | null;
       if (cardElement) {
         const { paymentMethod } = await stripe.createPaymentMethod({
           type: "card",
@@ -72,7 +75,6 @@ const PaymentForm = ({ paymentMethods }) => {
 
     setIsProcessing(false);
   };
-
   return (
     <div className="custom-card-form">
       {(paymentMethods?.length !== 0 && paymentMethods !== undefined) && !showForm ? (
@@ -80,7 +82,7 @@ const PaymentForm = ({ paymentMethods }) => {
           <select className="payment-method-dropdown">
             {paymentMethods?.map((item, index) => (
               <option key={index} value={item.card.id}>
-                {item.card.brand} - {item.card.country}
+                {item.card.brand} - {item.card.last4}
               </option>
             ))}
           </select>
